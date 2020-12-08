@@ -2,12 +2,13 @@ import FallingObject from './falling_objects';
 
 class Snowflake extends FallingObject {
   constructor(posX, posY, ctx, width, height, speed, color) {
-    super(posX, posY, ctx, width, height, speed)
+    super(posX, posY, ctx, width, height, speed);
     this.color = color;
     this.startY = posY;
     this.startX = posX;
     this.initialangle = Math.random() * (Math.PI * 2);
     this.lifespan = 350;
+    
     // radius of snowflake spiral
     // chosen so the snowflakes are uniformly spread out in area
     let windowWidth = this.ctx.width

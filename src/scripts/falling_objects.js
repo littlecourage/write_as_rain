@@ -17,10 +17,10 @@ class FallingObject {
 
   update() {
     this.posY += this.speed;
-
     if (this.posY > this.ctx.height) {
       this.posY = this.startY;
     }
+    
   }
 
 }
