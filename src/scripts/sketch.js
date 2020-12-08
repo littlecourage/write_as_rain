@@ -3,14 +3,14 @@ import Snowflake from './snowflakes'
 
 const sketch = (p) => {
   let snowflakes = [];
-  let height = 600;
-  let width = 600;
+  let height = 500;
+  let width = 800;
   let color = 240;
   let blobSpeed = 1;
   let backgroundColor = 'gray';
 
   p.setup = () => {
-    p.createCanvas(height, width);
+    p.createCanvas(width, height);
     p.fill(color);
     p.noStroke();
     // blob = new Snowflake(blobX, blobY, p, blobWidth, blobHeight, blobSpeed, color);
