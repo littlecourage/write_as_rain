@@ -1,5 +1,5 @@
 import p5 from 'p5';
-import { FallingObject, Snowflake } from './objects'
+import Snowflake from './snowflakes'
 
 const sketch = (p) => {
   let snowflakes = [];

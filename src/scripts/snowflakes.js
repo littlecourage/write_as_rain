@@ -1,29 +1,4 @@
-
-class FallingObject {
-  constructor(posX, posY, ctx, width, height, speed, color) {
-    this.startY = posY;
-    this.posX = posX;
-    this.posY = posY;
-    this.ctx = ctx;
-    this.width = width;
-    this.height = height;
-    this.speed = speed;
-    this.color = color;
-  }
-
-  display() {
-    this.ctx.square(this.posX, this.posY, this.width);
-  }
-
-  update() {
-    this.posY += this.speed;
-
-    if (this.posY > this.ctx.height) {
-      this.posY = this.startY;
-    }
-  }
-
-}
+import FallingObject from './falling_objects';
 
 class Snowflake extends FallingObject {
   constructor(posX, posY, ctx, width, height, speed, color) {
@@ -45,7 +20,7 @@ class Snowflake extends FallingObject {
     let spiralRate = 0.1; // angular speed
     let spiralChange = spiralRate * time
     let newAngle = this.initialangle + spiralChange;
-    
+
     // controls how the snowflake spirals as it falls
     this.posX = (this.ctx.width / 2) + (this.radius * Math.sin(newAngle));
 
@@ -75,4 +50,4 @@ class Snowflake extends FallingObject {
   }
 }
 
-export { FallingObject, Snowflake };
+export default Snowflake;
