@@ -1,6 +1,7 @@
 import p5 from 'p5';
 import Snowflake from './snowflakes';
 import Raindrop from './raindrops';
+import fetch from '../data/weather_api';
 
 const sketch = (p) => {
   let height = 500;
@@ -19,10 +20,13 @@ const sketch = (p) => {
   let blobSpeed = 4;
   let initialAngle = -3;
   let blob;
+  const targetUrl = 'https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/2459115/';
+
 
   p.setup = () => {
     p.createCanvas(width, height);
-
+    // let data = p.loadJSON(targetUrl);
+    // console.log(data);
     // use fill and no stroke for snowflake
     // p.fill(color);
     // p.noStroke();
