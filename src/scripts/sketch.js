@@ -1,6 +1,7 @@
 import p5 from 'p5';
 import Snowflake from './snowflakes';
 import Raindrop from './raindrops';
+import Sleet from './sleet';
 import DataManager from './data_manager';
 import {weatherTypes, weatherDetails} from './weather_details';
 
@@ -18,6 +19,7 @@ export const sketch = (p) => {
   //containers for weather particles
   let snowflakes = [];
   let raindrops = [];
+  let sleets = [];
   
   // When using API to fetch weather
   let queryData;
@@ -30,7 +32,7 @@ export const sketch = (p) => {
     await weatherData.then(data => queryData = data)
     // let weather = queryData.consolidated_weather[0].weather_state_name;
     console.log(queryData);
-    weather = 'Snow';
+    weather = 'Sleet';
 
 
     if (weather === 'Heavy Rain') {
@@ -44,6 +46,11 @@ export const sketch = (p) => {
       //use fill and no stroke for snowflake
       p.fill(weatherDetails.SNOW.color);
       p.noStroke();
+    }
+
+    if (weather === 'Sleet') {
+      backgroundColor = weatherDetails.SLEET.backgroundColor;
+      p.stroke(weatherDetails.SLEET.color);
     }
 
   }
@@ -83,7 +90,9 @@ export const sketch = (p) => {
         drop.update(t);
       }
 
-    } else if (weather === 'Snow') {
+    }
+    
+    if (weather === 'Snow') {
       let details = weatherDetails.SNOW
       p.background(details.backgroundColor);
       //snow
@@ -121,6 +130,43 @@ export const sketch = (p) => {
       //     snowflakes.splice(0, 100);
       //     console.log(snowflakes.length);
       // }
+    }
+
+    if (weather === 'Sleet') {
+      let details = weatherDetails.SLEET
+      p.background(details.backgroundColor);
+
+      //raindrops created during every frame of animation
+      for (let i = 0; i < p.random(10, 20); i++) {
+        let blobX = p.random(-canvasWidth, 2 * canvasWidth);
+        let blobY = Math.random() * -10;
+        let blobHeight = p.random(6, 8);
+        let blobWidth = p.random(1, 3);
+        let initialAngle = p.random(1, 2.5)
+
+        let sleetParams = {
+          posX: blobX,
+          posY: blobY,
+          ctx: p,
+          height: blobHeight,
+          width: blobWidth,
+          speed: details.blobSpeed,
+          color: details.color,
+          initialAngle: initialAngle
+        }
+
+        sleets.push(new Sleet(sleetParams))
+      }
+      let t = p.frameCount / 60;
+      for (let i = 0; i < sleets.length; i++) {
+        let sleet = sleets[i];
+        if (sleet.lifeSpan <= 0) {
+          sleets.splice(i, 1);
+        }
+        sleet.display();
+        sleet.update(t);
+      }
+
     }
     
   }

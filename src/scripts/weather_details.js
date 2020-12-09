@@ -35,5 +35,11 @@ export const weatherDetails = {
     blobSpeed: 3,
     backgroundColor: '#e0e6eb',
     initialAngle: -3
+  },
+  SLEET: {
+    color: '#ecf2f9',
+    blobSpeed: 8,
+    backgroundColor: '#576675',
+    initialAngle: 1
   }
 }
