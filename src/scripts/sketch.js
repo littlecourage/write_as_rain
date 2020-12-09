@@ -32,13 +32,26 @@ export const sketch = (p) => {
     await weatherData.then(data => queryData = data)
     // let weather = queryData.consolidated_weather[0].weather_state_name;
     console.log(queryData);
-    weather = 'Sleet';
+    
+    weather = 'Showers';
 
 
     if (weather === 'Heavy Rain') {
       backgroundColor = weatherDetails.HEAVYRAIN.backgroundColor;
       //use stroke and no fill for raindrop
       p.stroke(weatherDetails.HEAVYRAIN.color);
+    }
+
+    if (weather === 'Light Rain') {
+      backgroundColor = weatherDetails.LIGHTRAIN.backgroundColor;
+      //use stroke and no fill for raindrop
+      p.stroke(weatherDetails.LIGHTRAIN.color);
+    }
+
+    if (weather === 'Showers') {
+      backgroundColor = weatherDetails.SHOWERS.backgroundColor;
+      //use stroke and no fill for raindrop
+      p.stroke(weatherDetails.SHOWERS.color);
     }
 
     if (weather === 'Snow') {
@@ -56,16 +69,23 @@ export const sketch = (p) => {
   }
     
   p.draw = () => {
-    if (weather === 'Heavy Rain') {
-      let details = weatherDetails.HEAVYRAIN
+    if (weather === 'Heavy Rain' || weather === 'Light Rain' || weather === 'Showers') {
+      let details;
+      if (weather === 'Heavy Rain') {
+        details = weatherDetails.HEAVYRAIN;
+      } else if (weather === 'Light Rain') {
+        details = weatherDetails.LIGHTRAIN;
+      } else if (weather === 'Showers') {
+        details = weatherDetails.SHOWERS
+      }
       p.background(details.backgroundColor);
 
       //raindrops created during every frame of animation
-      for (let i = 0; i < p.random(5); i++) {
+      for (let i = 0; i < p.random(5, 10); i++) {
         let blobX = p.random(-canvasWidth, 2 * canvasWidth);
         let blobY = Math.random() * -10;
         let blobHeight = p.random(2, 5);
-        let blobWidth = p.random(2, 5);
+        let blobWidth = 1;
 
         let rainParams = {
           posX: blobX,

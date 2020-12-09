@@ -8,14 +8,12 @@ class Raindrop extends FallingObject {
     this.startY = posY;
     this.startX = posX;
     this.initialAngle = initialAngle;
-    this.lifeSpan = 250;
   }
 
   update(time) {
     this.posY += this.speed;
     if (this.posY >= this.ctx.height) {
-      this.posY = this.startY;
-      this.posX = this.startX;
+      this.lifeSpan = 0;
     }
 
     this.posX += this.initialAngle;
@@ -23,8 +21,6 @@ class Raindrop extends FallingObject {
     //   this.posY = this.startY;
     //   this.posX = this.startX;
     // }
-
-    this.lifeSpan --;
   }
 
   display() {

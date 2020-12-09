@@ -36,6 +36,18 @@ export const weatherDetails = {
     backgroundColor: '#e0e6eb',
     initialAngle: -3
   },
+  LIGHTRAIN: {
+    color: 'red',
+    blobSpeed: 1,
+    backgroundColor: '#e0e6eb',
+    initialAngle: 0
+  },
+  SHOWERS: {
+    color: 'purple',
+    blobSpeed: 2,
+    backgroundColor: '#e0e6eb',
+    initialAngle: -1
+  },
   SLEET: {
     color: '#ecf2f9',
     blobSpeed: 8,
