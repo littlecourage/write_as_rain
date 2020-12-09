@@ -15,19 +15,16 @@ class APIWeather {
   getWeather() {
     return (
       fetch(this.proxyUrl + this.targetUrl)
-      .then(blob => blob.json())
+      .then(blob => {
+        return blob.json()
+      })
       .then((data) => {
         return data;
       })
-      .catch(
-        (err) => {
-          console.log('Something went wrong', err)
-        }
-      )
+      .catch((err) => {
+        console.log('Something went wrong', err)
+      })
     )
-        
-    
-
   }
 
 }

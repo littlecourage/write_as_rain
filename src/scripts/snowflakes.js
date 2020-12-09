@@ -1,7 +1,7 @@
 import FallingObject from './falling_objects';
 
 class Snowflake extends FallingObject {
-  constructor(posX, posY, ctx, width, height, speed, color) {
+  constructor({posX, posY, ctx, width, height, color, speed}) {
     super(posX, posY, ctx, width, height, speed);
     this.color = color;
     this.startY = posY;

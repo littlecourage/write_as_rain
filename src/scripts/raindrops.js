@@ -2,8 +2,8 @@ import FallingObject from './falling_objects';
 
 class Raindrop extends FallingObject {
 
-  constructor(posX, posY, ctx, width, height, speed, color, initialAngle) {
-    super(posX, posY, ctx, width, height, speed);
+  constructor({posX, posY, ctx, height, speed, color, initialAngle}) {
+    super(posX, posY, ctx, height, speed);
     this.color = color;
     this.startY = posY;
     this.startX = posX;
