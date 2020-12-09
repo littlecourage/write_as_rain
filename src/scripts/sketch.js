@@ -57,12 +57,14 @@ export const sketch = (p) => {
         let blobX = p.random(-canvasWidth, 2 * canvasWidth);
         let blobY = Math.random() * -10;
         let blobHeight = p.random(2, 5);
+        let blobWidth = p.random(2, 5);
 
         let rainParams = {
           posX: blobX,
           posY: blobY,
           ctx: p,
           height: blobHeight,
+          width: blobWidth,
           speed: details.blobSpeed,
           color: details.color,
           initialAngle: details.initialAngle
