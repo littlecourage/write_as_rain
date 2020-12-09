@@ -28,22 +28,22 @@ export const weatherDetails = {
   SNOW: {
     color: 240,
     blobSpeed: 1,
-    backgroundColor: 'gray',
+    backgroundColor: '#cccccc',
   },
   HEAVYRAIN: {
-    color: 'gray',
+    color: '#a2b4c3',
     blobSpeed: 3,
     backgroundColor: '#e0e6eb',
     initialAngle: -3
   },
   LIGHTRAIN: {
-    color: 'red',
+    color: '#a2b4c3',
     blobSpeed: 1,
     backgroundColor: '#e0e6eb',
     initialAngle: 0
   },
   SHOWERS: {
-    color: 'purple',
+    color: '#a2b4c3',
     blobSpeed: 2,
     backgroundColor: '#e0e6eb',
     initialAngle: -1
@@ -52,6 +52,12 @@ export const weatherDetails = {
     color: '#ecf2f9',
     blobSpeed: 8,
     backgroundColor: '#576675',
+    initialAngle: 1
+  },
+  HAIL: {
+    color: '#eff3f5',
+    blobSpeed: 2,
+    backgroundColor: '#cccccc',
     initialAngle: 1
   }
 }

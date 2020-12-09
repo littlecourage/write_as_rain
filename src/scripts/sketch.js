@@ -33,7 +33,7 @@ export const sketch = (p) => {
     // let weather = queryData.consolidated_weather[0].weather_state_name;
     console.log(queryData);
     
-    weather = 'Showers';
+    weather = 'Light Rain';
 
 
     if (weather === 'Heavy Rain') {
@@ -73,33 +73,72 @@ export const sketch = (p) => {
       let details;
       if (weather === 'Heavy Rain') {
         details = weatherDetails.HEAVYRAIN;
+        for (let i = 0; i < p.random(15, 20); i++) {
+          let blobX = p.random(-canvasWidth, 2 * canvasWidth);
+          let blobY = Math.random() * -10;
+          let blobHeight = p.random(4, 6);
+          let blobWidth = p.random(1, 2);
+
+          let rainParams = {
+            posX: blobX,
+            posY: blobY,
+            ctx: p,
+            height: blobHeight,
+            width: blobWidth,
+            speed: details.blobSpeed,
+            color: details.color,
+            initialAngle: details.initialAngle
+          }
+
+          raindrops.push(new Raindrop(rainParams))
+        }
       } else if (weather === 'Light Rain') {
         details = weatherDetails.LIGHTRAIN;
+        for (let i = 0; i < p.random(2, 4); i++) {
+          let blobX = p.random(-canvasWidth, 2 * canvasWidth);
+          let blobY = Math.random() * -10;
+          let blobHeight = p.random(1, 3);
+          let blobWidth = 1;
+
+          let rainParams = {
+            posX: blobX,
+            posY: blobY,
+            ctx: p,
+            height: blobHeight,
+            width: blobWidth,
+            speed: details.blobSpeed,
+            color: details.color,
+            initialAngle: details.initialAngle
+          }
+
+          raindrops.push(new Raindrop(rainParams))
+        }
       } else if (weather === 'Showers') {
         details = weatherDetails.SHOWERS
+        for (let i = 0; i < p.random(4, 8); i++) {
+          let blobX = p.random(-canvasWidth, 2 * canvasWidth);
+          let blobY = Math.random() * -10;
+          let blobHeight = p.random(2, 5);
+          let blobWidth = 1;
+
+          let rainParams = {
+            posX: blobX,
+            posY: blobY,
+            ctx: p,
+            height: blobHeight,
+            width: blobWidth,
+            speed: details.blobSpeed,
+            color: details.color,
+            initialAngle: details.initialAngle
+          }
+
+          raindrops.push(new Raindrop(rainParams))
+        }
       }
       p.background(details.backgroundColor);
 
       //raindrops created during every frame of animation
-      for (let i = 0; i < p.random(5, 10); i++) {
-        let blobX = p.random(-canvasWidth, 2 * canvasWidth);
-        let blobY = Math.random() * -10;
-        let blobHeight = p.random(2, 5);
-        let blobWidth = 1;
 
-        let rainParams = {
-          posX: blobX,
-          posY: blobY,
-          ctx: p,
-          height: blobHeight,
-          width: blobWidth,
-          speed: details.blobSpeed,
-          color: details.color,
-          initialAngle: details.initialAngle
-        }
-        
-        raindrops.push(new Raindrop(rainParams))
-      }
       let t = p.frameCount / 60;
       for (let i = 0; i < raindrops.length; i++) {
         let drop = raindrops[i];

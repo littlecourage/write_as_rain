@@ -24,7 +24,16 @@ class Raindrop extends FallingObject {
   }
 
   display() {
-    this.ctx.line(this.posX, this.posY, this.posX, this.posY + this.height);
+    if (this.initialAngle < 0) {
+      this.ctx.line(this.posX, this.posY, this.posX - this.height , this.posY + this.height);
+      this.ctx.strokeWeight(this.width);
+    } else if (this.initialAngle > 0) {
+      this.ctx.line(this.posX, this.posY, this.posX + this.height, this.posY + this.height);
+      this.ctx.strokeWeight(this.width);
+    } else {
+      this.ctx.line(this.posX, this.posY, this.posX, this.posY + this.height);
+      this.ctx.strokeWeight(this.width);
+    }
   }
 
 }
