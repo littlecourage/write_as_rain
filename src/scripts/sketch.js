@@ -2,6 +2,7 @@ import p5 from 'p5';
 import Snowflake from './snowflakes';
 import Raindrop from './raindrops';
 import Sleet from './sleet';
+import Hail from './hail';
 import DataManager from './data_manager';
 import {weatherTypes, weatherDetails} from './weather_details';
 
@@ -20,6 +21,7 @@ export const sketch = (p) => {
   let snowflakes = [];
   let raindrops = [];
   let sleets = [];
+  let hails = [];
   
   // When using API to fetch weather
   let queryData;
@@ -28,12 +30,13 @@ export const sketch = (p) => {
   p.setup = async () => {
     //create canvas container
     p.createCanvas(canvasWidth, canvasHeight);
-    p.text('loading weather...', canvasWidth/2, canvasHeight/2)
+    p.text('rendering the weather...', canvasWidth/2, canvasHeight/2)
     await weatherData.then(data => queryData = data)
-    // let weather = queryData.consolidated_weather[0].weather_state_name;
-    console.log(queryData);
+    // weather = queryData.consolidated_weather[0].weather_state_name;
+    // console.log(queryData);
+    // console.log(weather)
     
-    weather = 'Light Rain';
+    weather = 'Sleet';
 
 
     if (weather === 'Heavy Rain') {
@@ -64,6 +67,11 @@ export const sketch = (p) => {
     if (weather === 'Sleet') {
       backgroundColor = weatherDetails.SLEET.backgroundColor;
       p.stroke(weatherDetails.SLEET.color);
+    }
+
+    if (weather === 'Hail') {
+      backgroundColor = weatherDetails.HAIL.backgroundColor;
+      p.stroke(weatherDetails.HAIL.color);
     }
 
   }
@@ -142,7 +150,7 @@ export const sketch = (p) => {
       let t = p.frameCount / 60;
       for (let i = 0; i < raindrops.length; i++) {
         let drop = raindrops[i];
-        if (drop.lifeSpan <= 0) {
+        if (drop.lifespan <= 0) {
           raindrops.splice(i, 1);
         }
         drop.display();
@@ -219,7 +227,7 @@ export const sketch = (p) => {
       let t = p.frameCount / 60;
       for (let i = 0; i < sleets.length; i++) {
         let sleet = sleets[i];
-        if (sleet.lifeSpan <= 0) {
+        if (sleet.lifespan <= 0) {
           sleets.splice(i, 1);
         }
         sleet.display();
@@ -227,7 +235,41 @@ export const sketch = (p) => {
       }
 
     }
-    
+
+    if (weather === 'Hail') {
+      let details = weatherDetails.HAIL
+      p.background(details.backgroundColor);
+      //snow
+      for (let i = 0; i < p.random(10); i++) {
+        let blobX = p.random(-canvasWidth/2, canvasWidth + canvasWidth/2);
+        let blobY = Math.random() * -50;
+        let blobWidth = p.random(2, 5);
+        let blobHeight = p.random(2, 5);
+
+        let hailParams = {
+          posX: blobX,
+          posY: blobY,
+          ctx: p,
+          width: blobWidth,
+          height: blobHeight,
+          speed: details.blobSpeed,
+          color: details.color,
+          initialAngle: details.initialAngle
+        }
+        hails.push(new Hail(hailParams));
+      }
+
+      let t = p.frameCount / 60;
+      // loop through snow to check their lifespan
+      for (let i = 0; i < hails.length; i++) {
+        let hail = hails[i];
+        if (hail.lifespan <= 0) {
+          hails.splice(i, 1)
+        }
+        hail.update(t);
+        hail.display();
+      }
+    }
   }
  
 }

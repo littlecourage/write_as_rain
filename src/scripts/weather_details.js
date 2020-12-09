@@ -51,13 +51,13 @@ export const weatherDetails = {
   SLEET: {
     color: '#ecf2f9',
     blobSpeed: 8,
-    backgroundColor: '#576675',
+    backgroundColor: '#cccccc',
     initialAngle: 1
   },
   HAIL: {
     color: '#eff3f5',
-    blobSpeed: 2,
+    blobSpeed: 4,
     backgroundColor: '#cccccc',
-    initialAngle: 1
+    initialAngle: 0.3
   }
 }

@@ -1,6 +1,6 @@
 import FallingObject from './falling_objects';
 
-class Sleet extends FallingObject {
+class Hail extends FallingObject {
 
   constructor({ posX, posY, ctx, width, height, speed, color, initialAngle }) {
     super(posX, posY, ctx, width, height, speed);
@@ -12,7 +12,7 @@ class Sleet extends FallingObject {
   }
 
   update(time) {
-    this.posY += Math.pow(this.width, 0.5) + this.speed;
+    this.posY += this.speed;
     if (this.posY >= this.ctx.height) {
       this.lifespan = 0;
     }
@@ -21,10 +21,9 @@ class Sleet extends FallingObject {
   }
 
   display() {
-    this.ctx.line(this.posX, this.posY, this.posX + this.height/2, this.posY + this.height);
-    this.ctx.strokeWeight(this.width);
+    this.ctx.ellipse(this.posX, this.posY, this.width, this.height);
   }
 
 }
 
-export default Sleet;
+export default Hail;
