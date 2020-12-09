@@ -24,13 +24,14 @@ export const sketch = (p) => {
   let weather;
 
   p.setup = async () => {
+    //create canvas container
+    p.createCanvas(canvasWidth, canvasHeight);
+    p.text('loading weather...', canvasWidth/2, canvasHeight/2)
     await weatherData.then(data => queryData = data)
     // let weather = queryData.consolidated_weather[0].weather_state_name;
     console.log(queryData);
-    weather = 'Heavy Rain';
+    weather = 'Snow';
 
-    //create canvas container
-    p.createCanvas(canvasWidth, canvasHeight);
 
     if (weather === 'Heavy Rain') {
       backgroundColor = weatherDetails.HEAVYRAIN.backgroundColor;
