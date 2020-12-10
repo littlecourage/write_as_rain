@@ -4,6 +4,7 @@ import Raindrop from './raindrops';
 import Sleet from './sleet';
 import Hail from './hail';
 import Cloud from './clouds';
+import Sun from './sun';
 import DataManager from './data_manager';
 import {weatherTypes, weatherDetails} from './weather_details';
 
@@ -43,8 +44,16 @@ export const sketch = (p) => {
     // console.log(queryData);
     // console.log(weather)
     
-    weather = 'Snow';
+    weather = 'Heavy Cloud';
 
+    if (weather === 'Clear') {
+      let details = weatherDetails.CLEAR
+      backgroundColor = details.backgroundColor;
+      //use stroke and no fill for raindrop
+      p.fill(weatherDetails.CLEAR.sunColor);
+      p.noStroke();
+      timer = 0;
+    }
 
     if (weather === 'Heavy Rain') {
       backgroundColor = weatherDetails.HEAVYRAIN.backgroundColor;
@@ -91,6 +100,53 @@ export const sketch = (p) => {
   }
     
   p.draw = () => {
+
+    if (weather === 'Clear') {
+      let cloudDetails = weatherDetails.LIGHTCLOUD
+      p.background(details.backgroundColor);
+      
+      let details = weatherDetails.CLEAR
+      let sunParams = {
+        posX: 100,
+        posY: 100,
+        ctx: p,
+        width: 60,
+        height: 60,
+        color: details.sunColor
+      }
+
+      let sun = new Sun(sunParams);
+      sun.display();
+
+      let cloudParamsSmall = {
+        posX: -100,
+        posY: p.random(-10, canvasHeight + 10),
+        ctx: p,
+        width: p.random(30, 50),
+        height: p.random(30, 50),
+        speed: p.random(0.1, 0.5),
+        color: cloudDetails.color,
+        numLobes: 8,
+        type: 'light'
+      }
+
+      timer += 1;
+      if (timer > p.random(450, 650)) {
+        clouds.push(new Cloud(cloudParamsSmall))
+        timer = 0;
+      }
+
+      for (let i = 0; i < clouds.length; i++) {
+        if (clouds[i].lifespan <= 0) {
+          clouds.splice(i, 1);
+        }
+        clouds[i].display();
+        clouds[i].update();
+      }
+
+    }
+
+
     if (weather === 'Heavy Rain' || weather === 'Light Rain' || weather === 'Showers') {
       let details;
       if (weather === 'Heavy Rain') {
@@ -283,6 +339,19 @@ export const sketch = (p) => {
       let details = weatherDetails.LIGHTCLOUD
       p.background(details.backgroundColor);
 
+      let sunDetails = weatherDetails.CLEAR
+      let sunParams = {
+        posX: 100,
+        posY: 100,
+        ctx: p,
+        width: 60,
+        height: 60,
+        color: sunDetails.sunColor
+      }
+
+      let sun = new Sun(sunParams);
+      sun.display();
+
       let cloudParams = {
         posX: -1000,
         posY: p.random(-10, canvasHeight + 10),
@@ -328,6 +397,19 @@ export const sketch = (p) => {
     if (weather === 'Heavy Cloud') {
       let details = weatherDetails.LIGHTCLOUD
       p.background(details.backgroundColor);
+
+      let sunDetails = weatherDetails.CLEAR
+      let sunParams = {
+        posX: 100,
+        posY: 100,
+        ctx: p,
+        width: 60,
+        height: 60,
+        color: sunDetails.sunColor
+      }
+
+      let sun = new Sun(sunParams);
+      sun.display();
 
       let cloudParams = {
         posX: -200,

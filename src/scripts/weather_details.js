@@ -64,5 +64,9 @@ export const weatherDetails = {
     color: ['#f2f2f2', '#eff3f5', '#f5f5f0', '#f0f5f5', '#ffffff', '#ffffff', '#ffffff'],
     blobSpeed: 1,
     backgroundColor: '#b7cfe1'
+  },
+  CLEAR: {
+    backgroundColor: '#b7cfe1',
+    sunColor: '#ffdb4d'
   }
 }
