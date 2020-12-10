@@ -61,8 +61,8 @@ export const weatherDetails = {
     initialAngle: 0.3
   },
   LIGHTCLOUD: {
-    color: '#eff3f5',
+    color: ['#f2f2f2', '#eff3f5', '#f5f5f0', '#f0f5f5', '#ffffff', '#ffffff', '#ffffff'],
     blobSpeed: 1,
-    backgroundColor: '#cccccc'
+    backgroundColor: '#b7cfe1'
   }
 }

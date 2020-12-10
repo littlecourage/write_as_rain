@@ -41,7 +41,7 @@ export const sketch = (p) => {
     // console.log(queryData);
     // console.log(weather)
     
-    weather = 'Light Cloud';
+    weather = 'Heavy Cloud';
 
 
     if (weather === 'Heavy Rain') {
@@ -79,7 +79,7 @@ export const sketch = (p) => {
       p.stroke(weatherDetails.HAIL.color);
     }
 
-    if (weather === 'Light Cloud') {
+    if (weather === 'Light Cloud' || weather === 'Heavy Cloud') {
       backgroundColor = weatherDetails.LIGHTCLOUD.backgroundColor;
       p.fill(weatherDetails.LIGHTCLOUD.color);
       p.noStroke();
@@ -280,24 +280,81 @@ export const sketch = (p) => {
     if (weather === 'Light Cloud') {
       let details = weatherDetails.LIGHTCLOUD
       p.background(details.backgroundColor);
-      let blobX = -5;
-      let blobY = p.random(-10, canvasHeight + 10);
-      let blobWidth = p.random(50, 70);
-      let blobHeight = p.random(50, 70);
 
       let cloudParams = {
-        posX: blobX,
-        posY: blobY,
+        posX: -1000,
+        posY: p.random(-10, canvasHeight + 10),
         ctx: p,
-        width: blobWidth,
-        height: blobHeight,
+        width: p.random(50, 120),
+        height: p.random(50, 100),
         speed: p.random(0.5, 1),
         color: details.color,
+        numLobes: 20,
+        type: 'light'
+      }
+
+      let cloudParamsSmall = {
+        posX: -100,
+        posY: p.random(-10, canvasHeight + 10),
+        ctx: p,
+        width: p.random(30, 50),
+        height: p.random(30, 50),
+        speed: p.random(0.7, 1),
+        color: details.color,
+        numLobes: 8,
+        type: 'light'
       }
 
       timer += 1;
       if (timer > p.random(150, 450)) {
+        clouds.push(new Cloud(cloudParamsSmall))
         clouds.push(new Cloud(cloudParams));
+        clouds.push(new Cloud(cloudParamsSmall))
+        timer = 0;
+      }
+
+      for (let i = 0; i < clouds.length; i++) {
+        if (clouds[i].lifespan <= 0) {
+          clouds.splice(i, 1);
+        }
+        clouds[i].display();
+        clouds[i].update();
+      }
+
+    }
+
+    if (weather === 'Heavy Cloud') {
+      let details = weatherDetails.LIGHTCLOUD
+      p.background(details.backgroundColor);
+
+      let cloudParams = {
+        posX: -200,
+        posY: p.random(-10, canvasHeight + 10),
+        ctx: p,
+        width: p.random(60, 150),
+        height: p.random(60, 150),
+        speed: p.random(0.5, 1),
+        color: details.color,
+        numLobes: 20,
+        type: 'heavy'
+      }
+
+      let cloudParamsSmall = {
+        posX: -200,
+        posY: p.random(-10, canvasHeight + 10),
+        ctx: p,
+        width: p.random(30, 50),
+        height: p.random(30, 50),
+        speed: p.random(0.7, 1),
+        color: details.color,
+        numLobes: 8,
+        type: 'heavy'
+      }
+
+      timer += 1;
+      if (timer > p.random(200, 350)) {
+        clouds.push(new Cloud(cloudParams));
+        clouds.push(new Cloud(cloudParamsSmall));
         clouds.push(new Cloud(cloudParams));
         timer = 0;
       }
@@ -311,6 +368,7 @@ export const sketch = (p) => {
       }
 
     }
+
 
   }
  
