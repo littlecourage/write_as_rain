@@ -3,6 +3,7 @@ import Snowflake from './snowflakes';
 import Raindrop from './raindrops';
 import Sleet from './sleet';
 import Hail from './hail';
+import Cloud from './clouds';
 import DataManager from './data_manager';
 import {weatherTypes, weatherDetails} from './weather_details';
 
@@ -22,10 +23,14 @@ export const sketch = (p) => {
   let raindrops = [];
   let sleets = [];
   let hails = [];
+  let clouds = [];
   
   // When using API to fetch weather
   let queryData;
   let weather;
+
+  //timer for clouds
+  let timer;
 
   p.setup = async () => {
     //create canvas container
@@ -36,7 +41,7 @@ export const sketch = (p) => {
     // console.log(queryData);
     // console.log(weather)
     
-    weather = 'Sleet';
+    weather = 'Light Cloud';
 
 
     if (weather === 'Heavy Rain') {
@@ -72,6 +77,13 @@ export const sketch = (p) => {
     if (weather === 'Hail') {
       backgroundColor = weatherDetails.HAIL.backgroundColor;
       p.stroke(weatherDetails.HAIL.color);
+    }
+
+    if (weather === 'Light Cloud') {
+      backgroundColor = weatherDetails.LIGHTCLOUD.backgroundColor;
+      p.fill(weatherDetails.LIGHTCLOUD.color);
+      p.noStroke();
+      timer = 0; 
     }
 
   }
@@ -191,12 +203,6 @@ export const sketch = (p) => {
         flake.update(t); // update snowflake position
         flake.display(); // redraw snowflake
       }
-
-      //splice off large chunk of snowflakes - was using this before chekcing lifespan
-      // if (snowflakes.length > 1000) {
-      //     snowflakes.splice(0, 100);
-      //     console.log(snowflakes.length);
-      // }
     }
 
     if (weather === 'Sleet') {
@@ -270,6 +276,42 @@ export const sketch = (p) => {
         hail.display();
       }
     }
+
+    if (weather === 'Light Cloud') {
+      let details = weatherDetails.LIGHTCLOUD
+      p.background(details.backgroundColor);
+      let blobX = -5;
+      let blobY = p.random(-10, canvasHeight + 10);
+      let blobWidth = p.random(50, 70);
+      let blobHeight = p.random(50, 70);
+
+      let cloudParams = {
+        posX: blobX,
+        posY: blobY,
+        ctx: p,
+        width: blobWidth,
+        height: blobHeight,
+        speed: p.random(0.5, 1),
+        color: details.color,
+      }
+
+      timer += 1;
+      if (timer > p.random(150, 450)) {
+        clouds.push(new Cloud(cloudParams));
+        clouds.push(new Cloud(cloudParams));
+        timer = 0;
+      }
+
+      for (let i = 0; i < clouds.length; i++) {
+        if (clouds[i].lifespan <= 0) {
+          clouds.splice(i, 1);
+        }
+        clouds[i].display();
+        clouds[i].update();
+      }
+
+    }
+
   }
  
 }
