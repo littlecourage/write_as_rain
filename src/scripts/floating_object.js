@@ -1,5 +1,5 @@
 class FloatingObject {
-  constructor(posX, posY, ctx, width, height, speed, color) {
+  constructor({posX, posY, ctx, width, height, speed, color}) {
     this.startY = posY;
     this.startX = posX;
     this.posX = posX;

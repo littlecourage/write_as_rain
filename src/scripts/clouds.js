@@ -3,7 +3,7 @@ import FloatingObject from './floating_object';
 class Cloud extends FloatingObject {
 
   constructor({posX, posY, ctx, width, height, speed, color, numLobes, type}) {
-    super(posX, posY, ctx, width, height, speed);
+    super({posX, posY, ctx, width, height, speed});
     this.lobes = [];
     this.lifespan = 400;
     this.color = color[Math.floor(Math.random() * color.length)]
