@@ -3,12 +3,7 @@ import FloatingObject from './floating_object';
 class Sun extends FloatingObject {
   constructor({posX, posY, ctx, width, height, color}) {
     super({posX, posY, ctx, width, height, color})
-    // this.posX = posX;
-    // this.posY = posY;
-    // this.ctx = ctx;
-    // this.width = width;
-    // this.height = height;
-    // this.color = color;
+
   }
 
   display() {
