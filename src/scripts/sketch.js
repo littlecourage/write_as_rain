@@ -9,8 +9,10 @@ import {weatherTypes, weatherDetails} from './weather_details';
 
 
 //const targetUrl = 'https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/2459115/';
-const nyId = 2459115
-const weatherData = DataManager.getData(nyId);
+const nyId = 2459115;
+const laId = 2442047;
+const abqId = 2352824;
+const weatherData = DataManager.getData(abqId);
 
 export const sketch = (p) => {
   //canvas attributes
@@ -36,12 +38,12 @@ export const sketch = (p) => {
     //create canvas container
     p.createCanvas(canvasWidth, canvasHeight);
     p.text('rendering the weather...', canvasWidth/2, canvasHeight/2)
-    await weatherData.then(data => queryData = data)
+    // await weatherData.then(data => queryData = data)
     // weather = queryData.consolidated_weather[0].weather_state_name;
     // console.log(queryData);
     // console.log(weather)
     
-    weather = 'Heavy Cloud';
+    weather = 'Snow';
 
 
     if (weather === 'Heavy Rain') {

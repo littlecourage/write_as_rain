@@ -20,7 +20,7 @@ const removeSketch = () => {
   document.getElementsByTagName('canvas')[0].remove();
   document.querySelector('#back').remove();
   let button = document.createElement("BUTTON")
-  button.innerHTML = "NYC Weather"
+  button.innerHTML = "Get Weather"
   button.setAttribute('id', 'nyc-weather')
   document.body.append(button)
   document.querySelector('#nyc-weather').addEventListener('click', () => sketchWeather())
