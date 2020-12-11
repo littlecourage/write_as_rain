@@ -345,17 +345,12 @@ export const sketch = (p) => {
       p.background(details.backgroundColor);
       //snow
       for (let i = 0; i < p.random(5); i++) {
-        let blobX = p.random(-50, canvasWidth + 50);
-        let blobY = Math.random() * -50;
-        let blobWidth = p.random(2, 5);
-        let blobHeight = p.random(2, 5);
-
         let snowParams = {
-          posX: blobX,
-          posY: blobY,
+          posX: p.random(-50, canvasWidth + 50),
+          posY: Math.random() * -50,
           ctx: p,
-          width: blobWidth,
-          height: blobHeight,
+          width: p.random(2, 5),
+          height: p.random(2, 5),
           speed: details.blobSpeed,
           color: details.color,
         }
