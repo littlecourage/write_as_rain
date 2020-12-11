@@ -2,7 +2,10 @@
   "name": "write_as_rain",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
+  "engines": {
+    "node": "14.15.0"
+  },
   "scripts": {
     "start": "node app.js",
     "start:debug": "DEBUG=* node app.js",
