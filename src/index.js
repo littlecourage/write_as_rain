@@ -1,6 +1,6 @@
 import "./styles/index.scss";
 import "@babel/polyfill";
-import {sketch} from './scripts/sketch';
+import {sketch, getWeather} from './scripts/sketch';
 import p5 from 'p5';
 
 
@@ -8,6 +8,8 @@ document.querySelector('#nyc-weather').addEventListener('click', () => sketchWea
 
 const sketchWeather = () => {
   document.querySelector('#nyc-weather').remove();
+  // launches request to the Weather Bit API not currently in use...
+  // let weather = getWeather(11375);
   new p5(sketch)
   let button = document.createElement("BUTTON")
   button.innerHTML = 'Back'

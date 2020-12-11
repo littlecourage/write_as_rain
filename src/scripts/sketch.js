@@ -6,6 +6,7 @@ import Hail from './hail';
 import Cloud from './clouds';
 import Sun from './sun';
 import DataManager from './data_manager';
+import axios from 'axios';
 import {weatherTypes, weatherDetails} from './weather_details';
 
 
@@ -14,6 +15,20 @@ const nyId = 2459115;
 const laId = 2442047;
 const abqId = 2352824;
 const weatherData = DataManager.getData(abqId);
+
+
+// request to backend to Weather Bit API, not currently being used...
+// export const getWeather = (zipcode) => {
+//   axios.get(`weather/${zipcode}`).then((res) => {
+//     console.log(res.data.data[0])
+//     return res.data.data[0]
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   })
+// }
+
+
 
 export const sketch = (p) => {
   //canvas attributes
@@ -39,12 +54,12 @@ export const sketch = (p) => {
     //create canvas container
     p.createCanvas(canvasWidth, canvasHeight);
     p.text('rendering the weather...', canvasWidth/2, canvasHeight/2)
-    await weatherData.then(data => queryData = data)
-    weather = queryData.consolidated_weather[0].weather_state_name;
-    console.log(queryData);
-    console.log(weather)
+    // await weatherData.then(data => queryData = data)
+    // weather = queryData.consolidated_weather[0].weather_state_name;
+    // console.log(queryData);
+    // console.log(weather)
     
-    // weather = 'Snow';
+    weather = 'Snow';
 
     if (weather === 'Clear') {
       let details = weatherDetails.CLEAR
