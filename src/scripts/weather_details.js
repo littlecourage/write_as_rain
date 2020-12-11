@@ -34,7 +34,7 @@ export const weatherDetails = {
     color: '#a2b4c3',
     blobSpeed: 3,
     backgroundColor: '#e0e6eb',
-    initialAngle: -3
+    initialAngle: 3
   },
   LIGHTRAIN: {
     color: '#a2b4c3',
@@ -46,7 +46,7 @@ export const weatherDetails = {
     color: '#a2b4c3',
     blobSpeed: 2,
     backgroundColor: '#e0e6eb',
-    initialAngle: -1
+    initialAngle: 0.4
   },
   SLEET: {
     color: '#ecf2f9',
@@ -71,6 +71,7 @@ export const weatherDetails = {
   },
   THUNDERSTORM: {
     backgroundColor: '#a6a6a6',
+    rainColor: '#8c8c8c',
     stormCloudColors: ['#bfbfbf', '#cccccc', '#d9d9d9', '#c1c5c7', '#D0D3D6', '#999999'],
   }
 }

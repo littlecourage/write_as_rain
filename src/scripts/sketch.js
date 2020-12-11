@@ -39,12 +39,12 @@ export const sketch = (p) => {
     //create canvas container
     p.createCanvas(canvasWidth, canvasHeight);
     p.text('rendering the weather...', canvasWidth/2, canvasHeight/2)
-    // await weatherData.then(data => queryData = data)
-    // weather = queryData.consolidated_weather[0].weather_state_name;
-    // console.log(queryData);
-    // console.log(weather)
+    await weatherData.then(data => queryData = data)
+    weather = queryData.consolidated_weather[0].weather_state_name;
+    console.log(queryData);
+    console.log(weather)
     
-    weather = 'Thunderstorm';
+    // weather = 'Snow';
 
     if (weather === 'Clear') {
       let details = weatherDetails.CLEAR
@@ -55,7 +55,7 @@ export const sketch = (p) => {
       timer = 0;
     }
 
-    if (weather === 'Thunderstorm') {
+    if (weather === 'Thunderstorm' || weather === 'Thunder') {
       let details = weatherDetails.THUNDERSTORM
       backgroundColor = details.backgroundColor;
       p.noStroke();
@@ -66,18 +66,21 @@ export const sketch = (p) => {
       backgroundColor = weatherDetails.HEAVYRAIN.backgroundColor;
       //use stroke and no fill for raindrop
       p.stroke(weatherDetails.HEAVYRAIN.color);
+      timer = 0;
     }
 
     if (weather === 'Light Rain') {
       backgroundColor = weatherDetails.LIGHTRAIN.backgroundColor;
       //use stroke and no fill for raindrop
       p.stroke(weatherDetails.LIGHTRAIN.color);
+      timer = 0;
     }
 
     if (weather === 'Showers') {
       backgroundColor = weatherDetails.SHOWERS.backgroundColor;
       //use stroke and no fill for raindrop
       p.stroke(weatherDetails.SHOWERS.color);
+      timer = 0;
     }
 
     if (weather === 'Snow') {
@@ -108,7 +111,7 @@ export const sketch = (p) => {
     
   p.draw = () => {
 
-    if (weather === 'Thunderstorm') {
+    if (weather === 'Thunderstorm'|| weather === 'Thunder') {
       let details = weatherDetails.THUNDERSTORM
       p.background(details.backgroundColor);
 
@@ -134,6 +137,38 @@ export const sketch = (p) => {
         color: details.stormCloudColors,
         numLobes: 10,
         type: 'light'
+      }
+
+      let rainDetails = weatherDetails.SHOWERS
+      for (let i = 0; i < p.random(4, 8); i++) {
+        let blobX = p.random(-canvasWidth, 2 * canvasWidth);
+        let blobY = Math.random() * -10;
+        let blobHeight = p.random(2, 5);
+        let blobWidth = 1;
+
+        let rainParams = {
+          posX: blobX,
+          posY: blobY,
+          ctx: p,
+          height: blobHeight,
+          width: blobWidth,
+          speed: rainDetails.blobSpeed,
+          color: details.color,
+          initialAngle: rainDetails.initialAngle
+        }
+
+        raindrops.push(new Raindrop(rainParams))
+      }
+
+      let t = p.frameCount / 60;
+      for (let i = 0; i < raindrops.length; i++) {
+        let drop = raindrops[i];
+        if (drop.lifespan <= 0) {
+          raindrops.splice(i, 1);
+        }
+        p.stroke(weatherDetails.THUNDERSTORM.rainColor);
+        drop.display();
+        drop.update(t);
       }
 
       timer += 1;
@@ -203,6 +238,7 @@ export const sketch = (p) => {
 
     if (weather === 'Heavy Rain' || weather === 'Light Rain' || weather === 'Showers') {
       let details;
+
       if (weather === 'Heavy Rain') {
         details = weatherDetails.HEAVYRAIN;
         for (let i = 0; i < p.random(15, 20); i++) {
