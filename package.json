@@ -1,5 +1,5 @@
 {
-  "name": "javascript_project",
+  "name": "write_as_rain",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -16,7 +16,7 @@
     "maintained node versions",
     "not dead"
   ],
-  "author": "",
+  "author": "littlecourage",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.12.9",
