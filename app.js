@@ -2,20 +2,21 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const fetch = require('node-fetch')
-require("dotenv").config();
+let dotenv = require("dotenv")
+dotenv.config();
 
 const PORT = process.env.PORT || 8000; // process.env accesses heroku's environment variables
 
-app.use(express.static('public'))
+app.use(express.static('dist'))
 
 app.get('/', (request, res) => {
-  res.sendFile(path.join(__dirname, './public/index.html'))
+  res.sendFile(path.join(__dirname, './dist/index.html'))
 })
 
 // create route to get current weather by  code
 app.get('/weather/:zipcode', (request, response) => {
   // make api call using fetch
-  fetch(`https://api.weatherbit.io/v2.0/current?postal_code=${request.params.zipcode}&country=USC&key=API_KEY`) 
+  fetch(`http://api.weatherbit.io/v2.0/current?postal_code=${request.params.zipcode}&country=USC&key=${process.env.WB_API_KEY}`)
     .then((response) => {
       return response.text();
     }).then((body) => {
