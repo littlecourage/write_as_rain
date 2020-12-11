@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
+    "dotenv": "^8.2.0",
     "p5": "^1.1.9",
     "p5.collide2d": "^0.7.3"
   }
