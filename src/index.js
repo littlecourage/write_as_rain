@@ -2,11 +2,16 @@ import "./styles/index.scss";
 import "@babel/polyfill";
 import {sketch, getWeather, weather} from './scripts/sketch';
 import {sketchSnow} from './scripts/sketch_snow';
+import {sleetSketch} from './scripts/sketch_sleet';
 import p5 from 'p5';
 
 
-document.querySelector('#nyc-weather').addEventListener('click', () => sketchWeather())
-document.querySelector('#sketch-snow').addEventListener('click', () => addSketchSnow())
+let nycButton = document.querySelector('#nyc-weather')
+let snowButton = document.querySelector('#sketch-snow')
+
+nycButton.addEventListener('click', () => sketchWeather())
+snowButton.addEventListener('click', () => addSketchSnow())
+
 
 const sketchWeather = () => {
   document.querySelector('#nyc-weather').classList.toggle('hidden');
@@ -18,11 +23,15 @@ const sketchWeather = () => {
 }
 
 const addBackButton = () => {
-  let button = document.createElement("BUTTON")
-  button.innerHTML = 'Back'
-  button.setAttribute('id', 'back')
-  document.body.append(button)
-  document.querySelector('#back').addEventListener('click', () => removeSketch())
+  if (document.querySelector('#back')) {
+    document.querySelector('#back').classList.toggle('hidden');
+  } else {
+    let button = document.createElement("BUTTON")
+    button.innerHTML = 'Back'
+    button.setAttribute('id', 'back')
+    document.body.append(button)
+    document.querySelector('#back').addEventListener('click', () => removeSketch())
+  }
 }
 
 const removeSketch = () => {
@@ -31,13 +40,8 @@ const removeSketch = () => {
     document.querySelector('#caption').remove();
   }
   document.querySelector('#back').classList.toggle('hidden');
-  document.querySelector('#nyc-weather').classList.toggle('normal');
-  document.querySelector('#sketch-snow').classList.toggle('normal');
-  // let button = document.createElement("BUTTON")
-  // button.innerHTML = "Get Weather"
-  // button.setAttribute('id', 'nyc-weather')
-  // document.body.append(button)
-  // document.querySelector('#nyc-weather').addEventListener('click', () => sketchWeather())
+  document.querySelector('#nyc-weather').classList.toggle('hidden');
+  document.querySelector('#sketch-snow').classList.toggle('hidden');
 }
 
 const addSketchSnow = () => {

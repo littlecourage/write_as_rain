@@ -373,7 +373,6 @@ export const sketch = (p) => {
       let details = weatherDetails.SLEET
       p.background(details.backgroundColor);
 
-      //raindrops created during every frame of animation
       for (let i = 0; i < p.random(10, 20); i++) {
         let blobX = p.random(-canvasWidth, 2 * canvasWidth);
         let blobY = Math.random() * -10;
