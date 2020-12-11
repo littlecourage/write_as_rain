@@ -14,7 +14,7 @@ import {weatherTypes, weatherDetails} from './weather_details';
 const nyId = 2459115;
 const laId = 2442047;
 const abqId = 2352824;
-const weatherData = DataManager.getData(abqId);
+// const weatherData = DataManager.getData(nyId);
 
 
 // request to backend to Weather Bit API, not currently being used...
@@ -29,12 +29,15 @@ const weatherData = DataManager.getData(abqId);
 // }
 
 
-
 export const sketch = (p) => {
   //canvas attributes
   const canvasHeight = 500;
   const canvasWidth = 800;
   let backgroundColor;
+  
+  // When using API to fetch weather
+  let queryData;
+  let weather;
 
   //containers for weather particles
   let snowflakes = [];
@@ -43,10 +46,6 @@ export const sketch = (p) => {
   let hails = [];
   let clouds = [];
   
-  // When using API to fetch weather
-  let queryData;
-  let weather;
-
   //timer for clouds
   let timer;
 
@@ -122,6 +121,13 @@ export const sketch = (p) => {
       timer = 0; 
     }
 
+    let weatherCaption = weather;
+    console.log(weatherCaption)
+    if (weatherCaption === "Light Cloud" || weatherCaption === 'Heavy Cloud') {
+      weatherCaption += "s";
+    }
+    p.createDiv(`Expect ${weatherCaption} in the NYC Area today`).id('caption')
+    
   }
     
   p.draw = () => {
