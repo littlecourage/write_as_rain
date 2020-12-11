@@ -68,5 +68,9 @@ export const weatherDetails = {
   CLEAR: {
     backgroundColor: '#b7cfe1',
     sunColor: '#ffdb4d'
+  },
+  THUNDERSTORM: {
+    backgroundColor: '#a6a6a6',
+    stormCloudColors: ['#bfbfbf', '#cccccc', '#d9d9d9', '#c1c5c7', '#D0D3D6', '#999999'],
   }
 }

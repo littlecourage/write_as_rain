@@ -9,7 +9,7 @@ class Cloud extends FloatingObject {
     this.color = color[Math.floor(Math.random() * color.length)]
     this.posY = ctx.random(-10, ctx.height + 10)
     this.type = type
-    this.numLobes = (type === 'light') ? ctx.random(8, 15) : (10, 20);
+    this.numLobes = (type === 'light') ? ctx.random(12, 16) : (16, 24);
     this.addLobes();
   }
 

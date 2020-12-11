@@ -44,13 +44,20 @@ export const sketch = (p) => {
     // console.log(queryData);
     // console.log(weather)
     
-    weather = 'Heavy Cloud';
+    weather = 'Thunderstorm';
 
     if (weather === 'Clear') {
       let details = weatherDetails.CLEAR
       backgroundColor = details.backgroundColor;
       //use stroke and no fill for raindrop
       p.fill(weatherDetails.CLEAR.sunColor);
+      p.noStroke();
+      timer = 0;
+    }
+
+    if (weather === 'Thunderstorm') {
+      let details = weatherDetails.THUNDERSTORM
+      backgroundColor = details.backgroundColor;
       p.noStroke();
       timer = 0;
     }
@@ -100,6 +107,53 @@ export const sketch = (p) => {
   }
     
   p.draw = () => {
+
+    if (weather === 'Thunderstorm') {
+      let details = weatherDetails.THUNDERSTORM
+      p.background(details.backgroundColor);
+
+      let cloudParams = {
+        posX: -200,
+        posY: p.random(-10, canvasHeight + 10),
+        ctx: p,
+        width: p.random(60, 150),
+        height: p.random(60, 150),
+        speed: p.random(0.2, 0.4),
+        color: details.stormCloudColors,
+        numLobes: 20,
+        type: 'heavy'
+      }
+
+      let cloudParamsSmall = {
+        posX: -50,
+        posY: p.random(-10, canvasHeight + 10),
+        ctx: p,
+        width: p.random(30, 50),
+        height: p.random(30, 50),
+        speed: p.random(0.3, 0.5),
+        color: details.stormCloudColors,
+        numLobes: 10,
+        type: 'light'
+      }
+
+      timer += 1;
+      if (timer > p.random(250, 350)) {
+        p.background('#e6e6e6');
+        clouds.push(new Cloud(cloudParams))
+        clouds.push(new Cloud(cloudParamsSmall))
+        p.background('#e6e6e6');
+        timer = 0;
+      }
+
+      for (let i = 0; i < clouds.length; i++) {
+        if (clouds[i].lifespan <= 0) {
+          clouds.splice(i, 1);
+        }
+        clouds[i].display();
+        clouds[i].update();
+      }
+
+    }
 
     if (weather === 'Clear') {
       let cloudDetails = weatherDetails.LIGHTCLOUD
