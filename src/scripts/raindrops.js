@@ -1,16 +1,19 @@
 import FallingObject from './falling_objects';
 
-class Raindrop extends FallingObject {
+class Raindrop {
 
-  constructor({posX, posY, ctx, width, height, speed, color, initialAngle}) {
-    super(posX, posY, ctx, width, height, speed);
+  constructor({color, ctx, blobSpeed, initialAngle}) {
+    this.ctx = ctx;
     this.color = color;
-    this.startY = posY;
-    this.startX = posX;
+    this.speed = blobSpeed;
     this.initialAngle = initialAngle;
+    this.posX = this.ctx.random(-400, 1200);
+    this.posY = Math.random() * -10;
+    this.height = this.ctx.random(4, 6);
+    this.width = this.ctx.random(1, 2);
   }
 
-  update(time) {
+  update() {
     this.posY += this.speed;
     if (this.posY >= this.ctx.height) {
       this.lifespan = 0;
@@ -24,6 +27,7 @@ class Raindrop extends FallingObject {
   }
 
   display() {
+
     if (this.initialAngle < 0) {
       this.ctx.line(this.posX, this.posY, this.posX - this.height , this.posY + this.height);
       this.ctx.strokeWeight(this.width);
