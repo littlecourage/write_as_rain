@@ -41,7 +41,7 @@ class Rain {
       drop.display();
     }
 
-    console.log(this.raindrops);
+    (this.raindrops);
 
   }
 

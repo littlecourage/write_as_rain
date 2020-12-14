@@ -98,7 +98,7 @@ export const buildObjects = (profiles, styles, ctx) => {
       ctx.noStroke();
       let sunParams = style;
       sunParams.ctx = ctx;
-      console.log(sunParams)
+      (sunParams)
       let sun = new Sun(sunParams);
       objects.push(sun);
     }
