@@ -80,7 +80,7 @@ export const buildObjects = (profiles, styles, ctx) => {
       ctx.noStroke();
       let hailParams = style;
       hailParams.ctx = ctx;
-      debugger
+      
       let hailStorm = new HailStorm(profile, ctx, hailParams);
       objects.push(hailStorm);
     }
@@ -105,7 +105,7 @@ export const buildObjects = (profiles, styles, ctx) => {
       ctx.noStroke();
       let stormCloudParams = style;
       stormCloudParams.ctx = ctx;
-      debugger
+      
       let heavyClouds = new CloudySky(profile, ctx, stormCloudParams);
       objects.push(heavyClouds);
     }

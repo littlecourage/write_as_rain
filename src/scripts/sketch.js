@@ -6,9 +6,10 @@ import Hail from './hail_stone';
 import Cloud from './clouds';
 import Sun from './sun';
 import Sky from './sky';
+import Ground from './ground';
 import DataManager from './data_manager';
 import axios from 'axios';
-import { STORMCLOUD, SUN, skyColors, weatherBitCodes, weatherDetails, weatherMap} from './weather_details';
+import { STORMCLOUD, SUN, backgroundStyles, weatherBitCodes, weatherDetails, weatherMap} from './weather_details';
 import {getProfile, buildObjects} from './builder';
 
 
@@ -38,7 +39,9 @@ export const sketch = (p) => {
   const canvasWidth = 800;
   let sky;
   let backgroundColor;
-  
+  let ground;
+  let groundColor;
+  let drawOnce;
   // When using API to fetch weather
   let queryData;
   let weather;
@@ -65,18 +68,22 @@ export const sketch = (p) => {
     // console.log(queryData);
     // console.log(weather)
     
-    weather = 't05d';
+    weather = 'd01d';
     let weatherName = weather.slice(0, weather.length - 1);
-    backgroundColor = skyColors[weatherName].color;
+    backgroundColor = backgroundStyles[weatherName].skyColor;
+    console.log(backgroundColor);
+    groundColor = backgroundStyles[weatherName].groundColor;
+    console.log(groundColor);
     sky = new Sky(backgroundColor, p);
+    ground = new Ground(groundColor, p);
 
     let profiles = getProfile(weather, weatherBitCodes);
 
-    if (skyColors[weatherName].stormClouds) {
-      profiles.unshift(STORMCLOUD)
+    if (backgroundStyles[weatherName].stormClouds) {
+      profiles.push(STORMCLOUD)
     }
 
-    if (skyColors[weatherName].sun) {
+    if (backgroundStyles[weatherName].sun) {
       profiles.unshift(SUN)
     }
 
@@ -86,7 +93,6 @@ export const sketch = (p) => {
 
     console.log(weatherObjects);
 
-    
     // p.background(backgroundColor)
     // if (weather === 'Clear') {
     //   let details = weatherDetails.CLEAR
@@ -160,14 +166,16 @@ export const sketch = (p) => {
     p.createDiv(`Expect ${weatherCaption} in the NYC Area today`).id('caption')
     
   }
-
-
+  
+  
   p.draw = () => {
     p.background(sky.color)
+    
     for (let obj of weatherObjects) {
       obj.display();
       obj.update();
     }
+    ground.display();
     
     if (weather === 'Thunderstorm'|| weather === 'Thunder') {
       let details = weatherDetails.THUNDERSTORM

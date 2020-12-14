@@ -1,7 +1,7 @@
 
 class Sun {
   constructor({color, posX, posY, ctx, width, height}) {
-    debugger
+    
     this.color = color,
     this.posX = posX,
     this.posY = posY,

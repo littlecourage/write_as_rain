@@ -7,7 +7,7 @@ class SmallCloud {
     this.lifespan = 400;
     this.color = cloudParams.color[Math.floor(Math.random() * cloudParams.color.length)];
     this.posX = -200;
-    this.posY = ctx.random(-10, ctx.height - 50);
+    this.posY = ctx.random(-10, ctx.height/3);
     this.width = ctx.random(30, 50);
     this.height = ctx.random(30, 50);
     this.speed = ctx.random(0.7, 1);

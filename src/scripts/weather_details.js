@@ -79,12 +79,12 @@ export const weatherDetails = {
     posY: -20
   },
   LIGHTCLOUD: {
-    color: ['#f2f2f2', '#eff3f5', '#f5f5f0', '#f0f5f5', '#ffffff', '#ffffff', '#ffffff'],
+    color: ['#f2f2f2', '#eff3f5', '#f5f5f0', '#f0f5f5', '#ffffff', '#ffffff'],
     blobSpeed: 1,
     // backgroundColor: '#b7cfe1'
   },
   HEAVYCLOUD: {
-    color: ['#f2f2f2', '#eff3f5', '#f5f5f0', '#f0f5f5', '#ffffff', '#ffffff', '#ffffff'],
+    color: ['#f2f2f2', '#eff3f5', '#f5f5f0', '#f0f5f5', '#ffffff', '#ffffff'],
     blobSpeed: 1,
     // backgroundColor: '#b7cfe1'
   },
@@ -109,147 +109,198 @@ export const weatherDetails = {
   }
 }
 
-export const skyColors = {
+export const backgroundStyles = {
   't01': {
-    color: '#a6a6a6',
+    skyColor: '#a6a6a6',
     sun: false,
-    stormClouds: true
+    stormClouds: true,
+    groundColor: '#B1A285'
   },
   't02': {
-    color: '#a6a6a6',
+    skyColor: '#a6a6a6',
     sun: false,
-    stormClouds: true
+    stormClouds: true,
+    groundColor: '#B1A285'
   },
   't03': {
-    color: '#a6a6a6',
+    skyColor: '#a6a6a6',
     sun: false,
-    stormClouds: true
+    stormClouds: true,
+    groundColor: '#B1A285'
   },
   't04': {
-    color: '#a6a6a6',
+    skyColor: '#a6a6a6',
     sun: false,
-    stormClouds: true
+    stormClouds: true,
+    groundColor: '#B1A285'
   },
   't05': {
-    color: '#a6a6a6',
+    skyColor: '#a6a6a6',
     sun: false,
-    stormClouds: true
+    stormClouds: true,
+    groundColor: '#867C65'
   },
   'd01': {
-    color: '#D7E3ED',
-    sun: false
+    skyColor: '#D7E3ED',
+    sun: false,
+    stormClouds: false,
+    groundColor: '#6D7559'
   },
   'd02': {
-    color: '#D7E3ED',
-    sun: false
+    skyColor: '#D7E3ED',
+    sun: false,
+    stormClouds: false,
+    groundColor: '#6D7559'
   },
   'd03': {
-    color: '#D7E3ED',
-    sun: false
+    skyColor: '#D7E3ED',
+    sun: false,
+    stormClouds: false,
+    groundColor: '#6D7559'
   },
   'r01': {
-    color: '#D7E3ED',
-    sun: false
+    skyColor: '#D7E3ED',
+    sun: false,
+    stormClouds: false,
+    groundColor: '#6D7559'
   },
   'r02': {
-    color: '#D7E3ED',
-    sun: false
+    skyColor: '#D7E3ED',
+    sun: false,
+    stormClouds: false,
+    groundColor: '#6D7559'
   },
   'r03': {
-    color: '#D7E3ED',
-    sun: false
+    skyColor: '#D7E3ED',
+    sun: false,
+    stormClouds: false,
+    groundColor: '#6D7559'
   },
   'r04': {
-    color: '#D7E3ED',
-    sun: false
+    skyColor: '#D7E3ED',
+    sun: false,
+    stormClouds: false,
+    groundColor: '#6D7559'
   },
   'r05': {
-    color: '#D7E3ED',
-    sun: false
+    skyColor: '#D7E3ED',
+    sun: false,
+    stormClouds: false,
+    groundColor: '#6D7559'
   },
   'r06': {
-    color: '#D7E3ED',
-    sun: false
+    skyColor: '#D7E3ED',
+    sun: false,
+    stormClouds: false,
+    groundColor: '#6D7559'
   },
   'f01': {
-    color: '#e0e6eb',
-    sun: false
+    skyColor: '#e0e6eb',
+    sun: false,
+    stormClouds: true,
+    groundColor: '#ecf2f9'
   },
   's01': {
-    color: '#e0e6eb',
+    skyColor: '#e0e6eb',
     sun: false,
-    stormClouds: true
+    stormClouds: true,
+    groundColor: '#ecf2f9'
   },
   's02': {
-    color: '#e0e6eb',
+    skyColor: '#e0e6eb',
     sun: false,
-    stormClouds: true
+    stormClouds: true,
+    groundColor: '#ecf2f9'
   },
   's03': {
-    color: '#e0e6eb',
+    skyColor: '#e0e6eb',
     sun: false,
-    stormClouds: true
+    stormClouds: true,
+    groundColor: '#ecf2f9'
   },
   's04': {
-    color: '#e0e6eb',
+    skyColor: '#e0e6eb',
     sun: false,
-    stormClouds: true
+    stormClouds: true,
+    groundColor: '#ecf2f9'
   },
   's05': {
-    color: '#e0e6eb',
+    skyColor: '#e0e6eb',
     sun: false,
-    stormClouds: true
+    stormClouds: true,
+    groundColor: '#ecf2f9'
   },
   's06': {
-    color: '#e0e6eb',
+    skyColor: '#e0e6eb',
     sun: false,
-    stormClouds: true
+    stormClouds: true,
+    groundColor: '#ecf2f9'
   },
   'a01': {
-    color: '#D7E3ED',
-    sun: false
+    skyColor: '#D7E3ED',
+    sun: false,
+    stormClouds: false,
+    groundColor: '#6D7559'
   },
   'a02': {
-    color: '#D7E3ED',
-    sun: false
+    skyColor: '#D7E3ED',
+    sun: false,
+    stormClouds: false,
+    groundColor: '#6D7559'
   },
   'a03': {
-    color: '#D7E3ED',
-    sun: false
+    skyColor: '#D7E3ED',
+    sun: false,
+    stormClouds: false,
+    groundColor: '#6D7559'
   },
   'a04': {
-    color: '#e0e6eb',
+    skyColor: '#e0e6eb',
     sun: false,
-    stormClouds: true
+    stormClouds: true,
+    groundColor: '#ecf2f9'
   },
   'a05': {
-    color: '#b7cfe1',
+    skyColor: '#b7cfe1',
     sun: true,
+    stormClouds: false,
+    groundColor: '#6D7559'
   },
   'a06': {
-    color: '#e0e6eb',
+    skyColor: '#e0e6eb',
     sun: false,
-    stormClouds: true
+    stormClouds: true,
+    groundColor: '#B1A285'
   },
   'c01': {
-    color: '#b7cfe1',
-    sun: true
+    skyColor: '#b7cfe1',
+    sun: true,
+    stormClouds: false,
+    groundColor: '#768F3A'
   },
   'c02': {
-    color: '#b7cfe1',
-    sun: true
+    skyColor: '#b7cfe1',
+    sun: true,
+    stormClouds: false,
+    groundColor: '#768F3A'
   },
   'c03': {
-    color: '#b7cfe1',
-    sun: true
+    skyColor: '#b7cfe1',
+    sun: true,
+    stormClouds: false,
+    groundColor: '#768F3A'
   },
   'c04': {
-    color: '#b7cfe1',
-    sun: true
+    skyColor: '#b7cfe1',
+    sun: true,
+    stormClouds: false,
+    groundColor: '#768F3A'
   },
   'u00': {
-    color: '#D7E3ED',
-    sun: false
+    skyColor: '#D7E3ED',
+    sun: false,
+    stormClouds: false,
+    groundColor: '#6D7559'
   }
 }
 
