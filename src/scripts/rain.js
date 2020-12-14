@@ -4,7 +4,6 @@ import {LIGHTRAIN, SHOWERS, HEAVYRAIN} from './weather_details';
 class Rain {
   constructor(type, ctx, dropParams) {
     this.type = type;
-    this.backgroundColor = dropParams.backgroundColor;
     this.ctx = ctx;
     this.dropParams = dropParams;
     this.raindrops = [];
@@ -22,8 +21,8 @@ class Rain {
   }
 
   display() {
-    this.ctx.background(this.backgroundColor);
-    
+    // this.ctx.background(this.backgroundColor);
+    this.ctx.stroke(this.dropParams.color);
     if (this.type === LIGHTRAIN) {
       for (let i = 0; i < this.ctx.random(2, 4); i++) {
         this.raindrops.push(new Raindrop(this.dropParams))     
@@ -41,6 +40,8 @@ class Rain {
     for (let drop of this.raindrops) {
       drop.display();
     }
+
+    console.log(this.raindrops);
 
   }
 

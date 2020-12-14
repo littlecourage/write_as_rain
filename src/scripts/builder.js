@@ -9,10 +9,13 @@ import {
   HAIL,
   HEAVYCLOUD,
   LIGHTCLOUD,
+  SUN,
   weatherBitCodes,
 } from './weather_details';
 
 import Rain from './rain';
+import CloudySky from './cloudy_sky';
+import Sun from './sun';
 
 
 export const getProfile = (type, map) => {
@@ -22,7 +25,6 @@ export const getProfile = (type, map) => {
   if (!results) {
   
   }
-  debugger
   return results
 }
 
@@ -30,10 +32,8 @@ export const getProfile = (type, map) => {
 export const buildObjects = (profiles, styles, ctx) => {
   let objects = [];
 
-  debugger
   for (let profile of profiles){
     let style = styles[profile];
-    let backgroundColor;
     if (profile === CLEAR) {
   
     }
@@ -43,15 +43,22 @@ export const buildObjects = (profiles, styles, ctx) => {
     }
     
     if (profile === HEAVYRAIN) {
-  
+      ctx.stroke(style.color);
+      let dropParams = style;
+      dropParams.ctx = ctx;
+      let heavyRain = new Rain(profile, ctx, dropParams);
+      objects.push(heavyRain);
     }
   
     if (profile === SHOWERS) {
-  
+      ctx.stroke(style.color);
+      let dropParams = style;
+      dropParams.ctx = ctx;
+      let showers = new Rain(profile, ctx, dropParams);
+      objects.push(showers);
     }
   
     if (profile === LIGHTRAIN) {
-      backgroundColor = style.backgroundColor;
       ctx.stroke(style.color);
       let dropParams = style;
       dropParams.ctx = ctx;
@@ -60,7 +67,7 @@ export const buildObjects = (profiles, styles, ctx) => {
     }
   
     if (profile === SNOW) {
-  
+      
     }
   
     if (profile === SLEET) {
@@ -72,15 +79,32 @@ export const buildObjects = (profiles, styles, ctx) => {
     }
   
     if (profile === HEAVYCLOUD) {
-  
+      ctx.noStroke();
+      let cloudParams = style;
+      cloudParams.ctx = ctx;
+      let heavyClouds = new CloudySky(profile, ctx, cloudParams);
+      objects.push(heavyClouds);
     }
   
     if (profile === LIGHTCLOUD) {
-  
+      ctx.noStroke();
+      let cloudParams = style;
+      cloudParams.ctx = ctx;
+      let heavyClouds = new CloudySky(profile, ctx, cloudParams);
+      objects.push(heavyClouds);
+    }
+
+    if (profile === SUN) {
+      ctx.noStroke();
+      let sunParams = style;
+      sunParams.ctx = ctx;
+      console.log(sunParams)
+      let sun = new Sun(sunParams);
+      objects.push(sun);
     }
   }
 
-  debugger
+  
   return objects;
 
 }

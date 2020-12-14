@@ -7,7 +7,7 @@ class Raindrop {
     this.color = color;
     this.speed = blobSpeed;
     this.initialAngle = initialAngle;
-    this.posX = this.ctx.random(-400, 1200);
+    this.posX = this.ctx.random(-800, 1600);
     this.posY = Math.random() * -10;
     this.height = this.ctx.random(4, 6);
     this.width = this.ctx.random(1, 2);
@@ -29,10 +29,10 @@ class Raindrop {
   display() {
 
     if (this.initialAngle < 0) {
-      this.ctx.line(this.posX, this.posY, this.posX - this.height , this.posY + this.height);
+      this.ctx.line(this.posX, this.posY, this.posX - this.initialAngle, this.posY + this.height);
       this.ctx.strokeWeight(this.width);
     } else if (this.initialAngle > 0) {
-      this.ctx.line(this.posX, this.posY, this.posX + this.height, this.posY + this.height);
+      this.ctx.line(this.posX, this.posY, this.posX + this.initialAngle, this.posY + this.height);
       this.ctx.strokeWeight(this.width);
     } else {
       this.ctx.line(this.posX, this.posY, this.posX, this.posY + this.height);

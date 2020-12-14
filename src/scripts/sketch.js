@@ -5,9 +5,10 @@ import Sleet from './sleet';
 import Hail from './hail';
 import Cloud from './clouds';
 import Sun from './sun';
+import Sky from './sky';
 import DataManager from './data_manager';
 import axios from 'axios';
-import { weatherTypes, weatherBitCodes, weatherDetails, weatherMap} from './weather_details';
+import { SUN, skyColors, weatherBitCodes, weatherDetails, weatherMap} from './weather_details';
 import {getProfile, buildObjects} from './builder';
 
 
@@ -35,6 +36,7 @@ export const sketch = (p) => {
   //canvas attributes
   const canvasHeight = 500;
   const canvasWidth = 800;
+  let sky;
   let backgroundColor;
   
   // When using API to fetch weather
@@ -63,13 +65,25 @@ export const sketch = (p) => {
     // console.log(queryData);
     // console.log(weather)
     
-    weather = 'r01d';
+    weather = 'c03d';
+    let weatherName = weather.slice(0, weather.length - 1);
+    backgroundColor = skyColors[weatherName].color;
+    sky = new Sky(backgroundColor, p);
 
     let profiles = getProfile(weather, weatherBitCodes);
+
+    if (skyColors[weatherName].sun) {
+      profiles.unshift(SUN)
+    }
+
     let objs = buildObjects(profiles, weatherDetails, p)
+  
     console.log(objs)
     weatherObjects = weatherObjects.concat(objs);
     console.log(weatherObjects);
+
+    
+    p.background(backgroundColor)
     // if (weather === 'Clear') {
     //   let details = weatherDetails.CLEAR
     //   backgroundColor = details.backgroundColor;
@@ -145,7 +159,7 @@ export const sketch = (p) => {
 
 
   p.draw = () => {
-
+    p.background(sky.color)
     for (let obj of weatherObjects) {
       obj.display();
       obj.update();

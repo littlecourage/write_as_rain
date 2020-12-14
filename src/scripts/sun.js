@@ -1,15 +1,23 @@
-import FloatingObject from './floating_object';
 
-class Sun extends FloatingObject {
-  constructor({posX, posY, ctx, width, height, color}) {
-    super({posX, posY, ctx, width, height, color})
-
+class Sun {
+  constructor({color, posX, posY, ctx, width, height}) {
+    debugger
+    this.color = color,
+    this.posX = posX,
+    this.posY = posY,
+    this.ctx = ctx,
+    this.width = width,
+    this.height = height
   }
 
   display() {
     this.ctx.noStroke();
-    this.ctx.fill(this.color);
+    this.ctx.fill(this.color)
     this.ctx.ellipse(this.posX, this.posY, this.width, this.height)
+  }
+
+  update() {
+
   }
 
 }
