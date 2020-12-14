@@ -18,7 +18,7 @@ import Rain from './rain';
 import CloudySky from './cloudy_sky';
 import Sun from './sun';
 import HailStorm from './hail_storm';
-
+import Thunderstorm from './thunderstorm';
 
 export const getProfile = (type, map) => {
   let weatherType = type.slice(0, type.length - 1);
@@ -41,7 +41,9 @@ export const buildObjects = (profiles, styles, ctx) => {
     }
   
     if (profile === THUNDERSTORM) {
-  
+      let color = styles[profile].color;
+      let thunderstorm = new Thunderstorm(ctx, color)
+      objects.push(thunderstorm);
     }
     
     if (profile === HEAVYRAIN) {

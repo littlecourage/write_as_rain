@@ -41,7 +41,7 @@ export const sketch = (p) => {
   let backgroundColor;
   let ground;
   let groundColor;
-  let drawOnce;
+
   // When using API to fetch weather
   let queryData;
   let weather;
@@ -68,7 +68,7 @@ export const sketch = (p) => {
     // console.log(queryData);
     // console.log(weather)
     
-    weather = 'd01d';
+    weather = 't02d';
     let weatherName = weather.slice(0, weather.length - 1);
     backgroundColor = backgroundStyles[weatherName].skyColor;
     console.log(backgroundColor);
@@ -88,9 +88,7 @@ export const sketch = (p) => {
     }
 
     let objs = buildObjects(profiles, weatherDetails, p)
-  
     weatherObjects = weatherObjects.concat(objs);
-
     console.log(weatherObjects);
 
     // p.background(backgroundColor)
