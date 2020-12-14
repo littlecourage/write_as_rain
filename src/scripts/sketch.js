@@ -2,13 +2,13 @@ import p5 from 'p5';
 import Snowflake from './snowflakes';
 import Rain from './rain';
 import Sleet from './sleet';
-import Hail from './hail';
+import Hail from './hail_stone';
 import Cloud from './clouds';
 import Sun from './sun';
 import Sky from './sky';
 import DataManager from './data_manager';
 import axios from 'axios';
-import { SUN, skyColors, weatherBitCodes, weatherDetails, weatherMap} from './weather_details';
+import { STORMCLOUD, SUN, skyColors, weatherBitCodes, weatherDetails, weatherMap} from './weather_details';
 import {getProfile, buildObjects} from './builder';
 
 
@@ -65,12 +65,16 @@ export const sketch = (p) => {
     // console.log(queryData);
     // console.log(weather)
     
-    weather = 'c03d';
+    weather = 't05d';
     let weatherName = weather.slice(0, weather.length - 1);
     backgroundColor = skyColors[weatherName].color;
     sky = new Sky(backgroundColor, p);
 
     let profiles = getProfile(weather, weatherBitCodes);
+
+    if (skyColors[weatherName].stormClouds) {
+      profiles.unshift(STORMCLOUD)
+    }
 
     if (skyColors[weatherName].sun) {
       profiles.unshift(SUN)
@@ -78,12 +82,12 @@ export const sketch = (p) => {
 
     let objs = buildObjects(profiles, weatherDetails, p)
   
-    console.log(objs)
     weatherObjects = weatherObjects.concat(objs);
+
     console.log(weatherObjects);
 
     
-    p.background(backgroundColor)
+    // p.background(backgroundColor)
     // if (weather === 'Clear') {
     //   let details = weatherDetails.CLEAR
     //   backgroundColor = details.backgroundColor;

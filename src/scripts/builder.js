@@ -10,12 +10,14 @@ import {
   HEAVYCLOUD,
   LIGHTCLOUD,
   SUN,
+  STORMCLOUD,
   weatherBitCodes,
 } from './weather_details';
 
 import Rain from './rain';
 import CloudySky from './cloudy_sky';
 import Sun from './sun';
+import HailStorm from './hail_storm';
 
 
 export const getProfile = (type, map) => {
@@ -75,7 +77,12 @@ export const buildObjects = (profiles, styles, ctx) => {
     }
   
     if (profile === HAIL) {
-  
+      ctx.noStroke();
+      let hailParams = style;
+      hailParams.ctx = ctx;
+      debugger
+      let hailStorm = new HailStorm(profile, ctx, hailParams);
+      objects.push(hailStorm);
     }
   
     if (profile === HEAVYCLOUD) {
@@ -91,6 +98,15 @@ export const buildObjects = (profiles, styles, ctx) => {
       let cloudParams = style;
       cloudParams.ctx = ctx;
       let heavyClouds = new CloudySky(profile, ctx, cloudParams);
+      objects.push(heavyClouds);
+    }
+
+    if (profile === STORMCLOUD) {
+      ctx.noStroke();
+      let stormCloudParams = style;
+      stormCloudParams.ctx = ctx;
+      debugger
+      let heavyClouds = new CloudySky(profile, ctx, stormCloudParams);
       objects.push(heavyClouds);
     }
 

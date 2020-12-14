@@ -21,7 +21,6 @@ class Rain {
   }
 
   display() {
-    // this.ctx.background(this.backgroundColor);
     this.ctx.stroke(this.dropParams.color);
     if (this.type === LIGHTRAIN) {
       for (let i = 0; i < this.ctx.random(2, 4); i++) {

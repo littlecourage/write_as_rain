@@ -1,11 +1,11 @@
 import Cloud from './clouds';
 import SmallCloud from './small_clouds.js';
-import {HEAVYCLOUD, LIGHTCLOUD} from './weather_details';
+import {HEAVYCLOUD, LIGHTCLOUD, STORMCLOUD} from './weather_details';
 
 class CloudySky {
   constructor(type, ctx, cloudParams) {
+    console.log(cloudParams);
     this.type = type;
-    this.backgroundColor = cloudParams.backgroundColor;
     this.ctx = ctx;
     this.cloudParams = cloudParams;
     this.clouds = [];
@@ -14,9 +14,7 @@ class CloudySky {
   }
 
   display() {
- 
     this.ctx.noStroke();
-
     this.timer += 1;
 
     if (this.type === HEAVYCLOUD) {
@@ -34,6 +32,16 @@ class CloudySky {
         this.clouds.push(new SmallCloud(this.type, this.ctx, this.cloudParams));
         this.clouds.push(new Cloud(this.type, this.ctx, this.cloudParams));
         this.clouds.push(new SmallCloud(this.type, this.ctx, this.cloudParams));
+        this.timer = 0;
+      }
+    }
+
+    if (this.type === STORMCLOUD) {
+      if (this.timer > this.ctx.random(200, 350)) {
+        this.clouds.push(new Cloud(this.type, this.ctx, this.cloudParams));
+        this.clouds.push(new Cloud(this.type, this.ctx, this.cloudParams));
+        this.clouds.push(new SmallCloud(this.type, this.ctx, this.cloudParams));
+        this.clouds.push(new Cloud(this.type, this.ctx, this.cloudParams));
         this.timer = 0;
       }
     }

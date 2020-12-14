@@ -11,6 +11,7 @@ export const HEAVYCLOUD = 'HEAVYCLOUD';
 export const LIGHTCLOUD = 'LIGHTCLOUD';
 export const CLEAR = 'CLEAR';
 export const SUN = 'SUN';
+export const STORMCLOUD = 'STORMCLOUD';
 
 export const weatherTypes = [
   SNOW,
@@ -72,9 +73,10 @@ export const weatherDetails = {
   },
   HAIL: {
     color: '#eff3f5',
-    blobSpeed: 4,
+    speed: 4,
     // backgroundColor: '#cccccc',
-    initialAngle: 0.3
+    initialAngle: 0.3,
+    posY: -20
   },
   LIGHTCLOUD: {
     color: ['#f2f2f2', '#eff3f5', '#f5f5f0', '#f0f5f5', '#ffffff', '#ffffff', '#ffffff'],
@@ -101,30 +103,37 @@ export const weatherDetails = {
   THUNDERSTORM: {
     // backgroundColor: '#a6a6a6',
     rainColor: '#8c8c8c',
-    stormCloudColors: ['#bfbfbf', '#cccccc', '#d9d9d9', '#c1c5c7', '#D0D3D6', '#999999'],
+  },
+  STORMCLOUD: {
+    color: ['#bfbfbf', '#cccccc', '#d9d9d9', '#c1c5c7', '#D0D3D6', '#999999'],
   }
 }
 
 export const skyColors = {
   't01': {
     color: '#a6a6a6',
-    sun: false
+    sun: false,
+    stormClouds: true
   },
   't02': {
     color: '#a6a6a6',
-    sun: false
+    sun: false,
+    stormClouds: true
   },
   't03': {
     color: '#a6a6a6',
-    sun: false
+    sun: false,
+    stormClouds: true
   },
   't04': {
     color: '#a6a6a6',
-    sun: false
+    sun: false,
+    stormClouds: true
   },
   't05': {
     color: '#a6a6a6',
-    sun: false
+    sun: false,
+    stormClouds: true
   },
   'd01': {
     color: '#D7E3ED',
@@ -168,27 +177,33 @@ export const skyColors = {
   },
   's01': {
     color: '#e0e6eb',
-    sun: false
+    sun: false,
+    stormClouds: true
   },
   's02': {
     color: '#e0e6eb',
-    sun: false
+    sun: false,
+    stormClouds: true
   },
   's03': {
     color: '#e0e6eb',
-    sun: false
+    sun: false,
+    stormClouds: true
   },
   's04': {
     color: '#e0e6eb',
-    sun: false
+    sun: false,
+    stormClouds: true
   },
   's05': {
     color: '#e0e6eb',
-    sun: false
+    sun: false,
+    stormClouds: true
   },
   's06': {
     color: '#e0e6eb',
-    sun: false
+    sun: false,
+    stormClouds: true
   },
   'a01': {
     color: '#D7E3ED',
@@ -204,15 +219,17 @@ export const skyColors = {
   },
   'a04': {
     color: '#e0e6eb',
-    sun: false
+    sun: false,
+    stormClouds: true
   },
   'a05': {
     color: '#b7cfe1',
-    sun: true
+    sun: true,
   },
   'a06': {
     color: '#e0e6eb',
-    sun: false
+    sun: false,
+    stormClouds: true
   },
   'c01': {
     color: '#b7cfe1',
@@ -242,7 +259,7 @@ export const weatherBitCodes = {
   't02': [THUNDERSTORM, SHOWERS],
   't03': [THUNDERSTORM, HEAVYRAIN],
   't04': [THUNDERSTORM, LIGHTRAIN],
-  't05': [THUNDERSTORM, HAIL],
+  't05': [HAIL],
   'd01': [LIGHTRAIN, HEAVYCLOUD],
   'd02': [SHOWERS, HEAVYCLOUD],
   'd03': [HEAVYRAIN, HEAVYCLOUD],

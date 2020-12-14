@@ -1,17 +1,18 @@
 import FallingObject from './falling_objects';
 
-class Hail extends FallingObject {
-
-  constructor({ posX, posY, ctx, width, height, speed, color, initialAngle }) {
-    super(posX, posY, ctx, width, height, speed);
+class HailStone {
+  constructor({ctx, speed, color, initialAngle, posY }) {
+    this.posX = ctx.random(-ctx.width / 2, ctx.width * 1.5);
+    this.posY = posY;
+    this.ctx = ctx;
+    this.width = ctx.random(2, 5);
+    this.height = ctx.random(2, 5);
+    this.speed = speed;
     this.color = color;
-    this.startY = posY;
-    this.startX = posX;
     this.initialAngle = initialAngle;
-    this.lifespan = 320;
   }
 
-  update(time) {
+  update() {
     this.posY += this.speed;
     if (this.posY >= this.ctx.height) {
       this.lifespan = 0;
@@ -21,9 +22,10 @@ class Hail extends FallingObject {
   }
 
   display() {
+    this.ctx.fill(this.color);
     this.ctx.ellipse(this.posX, this.posY, this.width, this.height);
   }
 
 }
 
-export default Hail;
+export default HailStone;
