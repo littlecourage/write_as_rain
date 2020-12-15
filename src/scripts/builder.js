@@ -11,6 +11,8 @@ import {
   LIGHTCLOUD,
   SUN,
   STORMCLOUD,
+  SCATTEREDCLOUD,
+  NIGHTCLOUD,
   weatherBitCodes,
 } from './weather_details';
 
@@ -19,6 +21,8 @@ import CloudySky from './cloudy_sky';
 import Sun from './sun';
 import HailStorm from './hail_storm';
 import Thunderstorm from './thunderstorm';
+import SleetStorm from './sleet_storm';
+import Snow from './snow';
 
 export const getProfile = (type, map) => {
   let weatherType = type.slice(0, type.length - 1);
@@ -31,13 +35,22 @@ export const getProfile = (type, map) => {
 }
 
 //change this to accept array of profiles eventually
-export const buildObjects = (profiles, styles, ctx) => {
+export const buildObjects = (profiles, styles, ctx, night) => {
   let objects = [];
 
   for (let profile of profiles){
     let style = styles[profile];
+
     if (profile === CLEAR) {
-  
+      let cloudParams;
+      if (night) {
+        cloudParams = styles[NIGHTCLOUD];
+      } else {
+        cloudParams = styles[SCATTEREDCLOUD];
+      }
+      cloudParams.ctx = ctx;
+      let scatteredClouds = new CloudySky(SCATTEREDCLOUD, ctx, cloudParams);
+      objects.push(scatteredClouds);
     }
   
     if (profile === THUNDERSTORM) {
@@ -71,11 +84,20 @@ export const buildObjects = (profiles, styles, ctx) => {
     }
   
     if (profile === SNOW) {
-      
+      ctx.noStroke();
+      let flakeParams = style;
+      flakeParams.ctx = ctx;
+      console.log(flakeParams);
+      let snow = new Snow(profile, ctx, flakeParams);
+      objects.push(snow);
     }
   
     if (profile === SLEET) {
-  
+      ctx.stroke(style.color);
+      let sleetParams = style;
+      sleetParams.ctx = ctx;
+      let sleetStorm = new SleetStorm(profile, ctx, sleetParams);
+      objects.push(sleetStorm);
     }
   
     if (profile === HAIL) {
@@ -89,7 +111,12 @@ export const buildObjects = (profiles, styles, ctx) => {
   
     if (profile === HEAVYCLOUD) {
       ctx.noStroke();
-      let cloudParams = style;
+      let cloudParams;
+      if (night) {
+        cloudParams = styles[STORMCLOUD]
+      } else {
+        cloudParams = style;
+      }
       cloudParams.ctx = ctx;
       let heavyClouds = new CloudySky(profile, ctx, cloudParams);
       objects.push(heavyClouds);
@@ -97,7 +124,13 @@ export const buildObjects = (profiles, styles, ctx) => {
   
     if (profile === LIGHTCLOUD) {
       ctx.noStroke();
-      let cloudParams = style;
+      let cloudParams;
+      if (night) {
+        cloudParams = styles[STORMCLOUD]
+      } else {
+        cloudParams = style;
+      }
+      console.log(cloudParams);
       cloudParams.ctx = ctx;
       let heavyClouds = new CloudySky(profile, ctx, cloudParams);
       objects.push(heavyClouds);
@@ -115,8 +148,12 @@ export const buildObjects = (profiles, styles, ctx) => {
     if (profile === SUN) {
       ctx.noStroke();
       let sunParams = style;
+      if (night) {
+        sunParams.color = '#FEF6E7';
+        sunParams.posX = 700;
+        sunParams.posY = 100;
+      }
       sunParams.ctx = ctx;
-      (sunParams)
       let sun = new Sun(sunParams);
       objects.push(sun);
     }

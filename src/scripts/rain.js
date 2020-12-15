@@ -39,9 +39,6 @@ class Rain {
     for (let drop of this.raindrops) {
       drop.display();
     }
-
-    (this.raindrops);
-
   }
 
 }

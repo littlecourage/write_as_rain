@@ -27,7 +27,6 @@ class Raindrop {
   }
 
   display() {
-
     if (this.initialAngle < 0) {
       this.ctx.line(this.posX, this.posY, this.posX - this.initialAngle, this.posY + this.height);
       this.ctx.strokeWeight(this.width);

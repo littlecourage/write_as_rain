@@ -1,6 +1,6 @@
 import Cloud from './clouds';
 import SmallCloud from './small_clouds.js';
-import {HEAVYCLOUD, LIGHTCLOUD, STORMCLOUD} from './weather_details';
+import {HEAVYCLOUD, LIGHTCLOUD, STORMCLOUD, SCATTEREDCLOUD, NIGHTCLOUD} from './weather_details';
 
 class CloudySky {
   constructor(type, ctx, cloudParams) {
@@ -9,7 +9,7 @@ class CloudySky {
     this.ctx = ctx;
     this.cloudParams = cloudParams;
     this.clouds = [];
-    this.timer = 100;
+    this.timer = 200;
     
   }
 
@@ -28,10 +28,9 @@ class CloudySky {
     }
 
     if (this.type === LIGHTCLOUD) {
-      if (this.timer > this.ctx.random(150, 450)) {
+      if (this.timer > this.ctx.random(300, 450)) {
         this.clouds.push(new SmallCloud(this.type, this.ctx, this.cloudParams));
         this.clouds.push(new Cloud(this.type, this.ctx, this.cloudParams));
-        this.clouds.push(new SmallCloud(this.type, this.ctx, this.cloudParams));
         this.timer = 0;
       }
     }
@@ -42,6 +41,14 @@ class CloudySky {
         this.clouds.push(new Cloud(this.type, this.ctx, this.cloudParams));
         this.clouds.push(new SmallCloud(this.type, this.ctx, this.cloudParams));
         this.clouds.push(new Cloud(this.type, this.ctx, this.cloudParams));
+        this.timer = 0;
+      }
+    }
+
+    if (this.type === SCATTEREDCLOUD) {
+      if (this.timer > this.ctx.random(400, 550)) {
+        this.clouds.push(new SmallCloud(this.type, this.ctx, this.cloudParams));
+        this.clouds.push(new SmallCloud(this.type, this.ctx, this.cloudParams));
         this.timer = 0;
       }
     }

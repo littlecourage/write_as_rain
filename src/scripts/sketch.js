@@ -58,6 +58,7 @@ export const sketch = (p) => {
   let timer;
   let lightRain;
   let dropParams;
+  let night = false;
 
   p.setup = async () => {
     //create canvas container
@@ -68,26 +69,25 @@ export const sketch = (p) => {
     // console.log(queryData);
     // console.log(weather)
     
-    weather = 't02d';
+    weather = 'u00n';
+    let timeOfDay = weather.slice(weather.length - 1);
     let weatherName = weather.slice(0, weather.length - 1);
-    backgroundColor = backgroundStyles[weatherName].skyColor;
-    console.log(backgroundColor);
-    groundColor = backgroundStyles[weatherName].groundColor;
-    console.log(groundColor);
+    console.log(timeOfDay)
+    if (timeOfDay === 'n' || timeOfDay === 'N') {
+      backgroundColor = backgroundStyles[weatherName].nightSkyColor;
+      groundColor = backgroundStyles[weatherName].nightGroundColor;
+      night = true;
+    } else {
+      backgroundColor = backgroundStyles[weatherName].skyColor;
+      groundColor = backgroundStyles[weatherName].groundColor;
+    }
+
     sky = new Sky(backgroundColor, p);
     ground = new Ground(groundColor, p);
 
     let profiles = getProfile(weather, weatherBitCodes);
 
-    if (backgroundStyles[weatherName].stormClouds) {
-      profiles.push(STORMCLOUD)
-    }
-
-    if (backgroundStyles[weatherName].sun) {
-      profiles.unshift(SUN)
-    }
-
-    let objs = buildObjects(profiles, weatherDetails, p)
+    let objs = buildObjects(profiles, weatherDetails, p, night)
     weatherObjects = weatherObjects.concat(objs);
     console.log(weatherObjects);
 
@@ -175,84 +175,84 @@ export const sketch = (p) => {
     }
     ground.display();
     
-    if (weather === 'Thunderstorm'|| weather === 'Thunder') {
-      let details = weatherDetails.THUNDERSTORM
-      p.background(details.backgroundColor);
+    // if (weather === 'Thunderstorm'|| weather === 'Thunder') {
+    //   let details = weatherDetails.THUNDERSTORM
+    //   p.background(details.backgroundColor);
       
-      let cloudParams = {
-        posX: -200,
-        posY: p.random(-10, canvasHeight + 10),
-        ctx: p,
-        width: p.random(60, 150),
-        height: p.random(60, 150),
-        speed: p.random(0.2, 0.4),
-        color: details.stormCloudColors,
-        numLobes: 20,
-        type: 'heavy'
-      }
+    //   let cloudParams = {
+    //     posX: -200,
+    //     posY: p.random(-10, canvasHeight + 10),
+    //     ctx: p,
+    //     width: p.random(60, 150),
+    //     height: p.random(60, 150),
+    //     speed: p.random(0.2, 0.4),
+    //     color: details.stormCloudColors,
+    //     numLobes: 20,
+    //     type: 'heavy'
+    //   }
       
-      let cloudParamsSmall = {
-        posX: -50,
-        posY: p.random(-10, canvasHeight + 10),
-        ctx: p,
-        width: p.random(30, 50),
-        height: p.random(30, 50),
-        speed: p.random(0.3, 0.5),
-        color: details.stormCloudColors,
-        numLobes: 10,
-        type: 'light'
-      }
+    //   let cloudParamsSmall = {
+    //     posX: -50,
+    //     posY: p.random(-10, canvasHeight + 10),
+    //     ctx: p,
+    //     width: p.random(30, 50),
+    //     height: p.random(30, 50),
+    //     speed: p.random(0.3, 0.5),
+    //     color: details.stormCloudColors,
+    //     numLobes: 10,
+    //     type: 'light'
+    //   }
       
-      let rainDetails = weatherDetails.SHOWERS
-      for (let i = 0; i < p.random(4, 8); i++) {
-        let blobX = p.random(-canvasWidth, 2 * canvasWidth);
-        let blobY = Math.random() * -10;
-        let blobHeight = p.random(2, 5);
-        let blobWidth = 1;
+    //   let rainDetails = weatherDetails.SHOWERS
+    //   for (let i = 0; i < p.random(4, 8); i++) {
+    //     let blobX = p.random(-canvasWidth, 2 * canvasWidth);
+    //     let blobY = Math.random() * -10;
+    //     let blobHeight = p.random(2, 5);
+    //     let blobWidth = 1;
         
-        let rainParams = {
-          posX: blobX,
-          posY: blobY,
-          ctx: p,
-          height: blobHeight,
-          width: blobWidth,
-          speed: rainDetails.blobSpeed,
-          color: details.color,
-          initialAngle: rainDetails.initialAngle
-        }
+    //     let rainParams = {
+    //       posX: blobX,
+    //       posY: blobY,
+    //       ctx: p,
+    //       height: blobHeight,
+    //       width: blobWidth,
+    //       speed: rainDetails.blobSpeed,
+    //       color: details.color,
+    //       initialAngle: rainDetails.initialAngle
+    //     }
         
-        raindrops.push(new Raindrop(rainParams))
-      }
+    //     raindrops.push(new Raindrop(rainParams))
+    //   }
       
-      let t = p.frameCount / 60;
-      for (let i = 0; i < raindrops.length; i++) {
-        let drop = raindrops[i];
-        if (drop.lifespan <= 0) {
-          raindrops.splice(i, 1);
-        }
-        p.stroke(weatherDetails.THUNDERSTORM.rainColor);
-        drop.display();
-        drop.update(t);
-      }
+    //   let t = p.frameCount / 60;
+    //   for (let i = 0; i < raindrops.length; i++) {
+    //     let drop = raindrops[i];
+    //     if (drop.lifespan <= 0) {
+    //       raindrops.splice(i, 1);
+    //     }
+    //     p.stroke(weatherDetails.THUNDERSTORM.rainColor);
+    //     drop.display();
+    //     drop.update(t);
+    //   }
       
-      timer += 1;
-      if (timer > p.random(250, 350)) {
-        p.background('#e6e6e6');
-        clouds.push(new Cloud(cloudParams))
-        clouds.push(new Cloud(cloudParamsSmall))
-        p.background('#e6e6e6');
-        timer = 0;
-      }
+    //   timer += 1;
+    //   if (timer > p.random(250, 350)) {
+    //     p.background('#e6e6e6');
+    //     clouds.push(new Cloud(cloudParams))
+    //     clouds.push(new Cloud(cloudParamsSmall))
+    //     p.background('#e6e6e6');
+    //     timer = 0;
+    //   }
       
-      for (let i = 0; i < clouds.length; i++) {
-        if (clouds[i].lifespan <= 0) {
-          clouds.splice(i, 1);
-        }
-        clouds[i].display();
-        clouds[i].update();
-      }
+    //   for (let i = 0; i < clouds.length; i++) {
+    //     if (clouds[i].lifespan <= 0) {
+    //       clouds.splice(i, 1);
+    //     }
+    //     clouds[i].display();
+    //     clouds[i].update();
+    //   }
       
-    }
+    // }
     
     // if (weather === 'Clear') {
     //   let cloudDetails = weatherDetails.LIGHTCLOUD

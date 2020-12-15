@@ -11,6 +11,7 @@ class Ground {
   }
 
   display() {
+    this.ctx.noStroke();
     this.ctx.fill(this.color);
     this.ctx.rect(this.posX, this.posY, this.width, this.height)
   }
