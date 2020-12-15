@@ -74,10 +74,12 @@ export const weatherDetails = {
   LIGHTCLOUD: {
     color: ['#f2f2f2', '#eff3f5', '#f5f5f0', '#f0f5f5', '#ffffff', '#ffffff'],
     blobSpeed: 1,
+    posX: -200
   },
   HEAVYCLOUD: {
     color: ['#f2f2f2', '#eff3f5', '#f5f5f0', '#f0f5f5', '#ffffff', '#ffffff'],
     blobSpeed: 1,
+    posX: -200
   },
   CLEAR: {
     sunColor: '#ffdb4d'
@@ -94,13 +96,16 @@ export const weatherDetails = {
   },
   STORMCLOUD: {
     color: ['#bfbfbf', '#cccccc', '#d9d9d9', '#c1c5c7', '#D0D3D6', '#999999'],
+    posX: -200
   },
   SCATTEREDCLOUD: {
     color: ['#f2f2f2', '#eff3f5', '#f5f5f0', '#f0f5f5', '#ffffff', '#ffffff'],
     blobSpeed: 1,
+    posX: -200
   },
   NIGHTCLOUD: {
     color: ['#bfbfbf', '#cccccc', '#d9d9d9', '#c1c5c7', '#D0D3D6', '#999999'],
+    posX: -200
   }
 }
 

@@ -1,12 +1,10 @@
-//import FloatingObject from './floating_object';
-
 class SmallCloud {
 
   constructor(type, ctx, cloudParams) {
     this.lobes = [];
     this.lifespan = 400;
     this.color = cloudParams.color[Math.floor(Math.random() * cloudParams.color.length)];
-    this.posX = -200;
+    this.posX = cloudParams.posX;
     this.posY = ctx.random(-10, ctx.height/3);
     this.width = ctx.random(30, 50);
     this.height = ctx.random(30, 50);

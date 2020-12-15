@@ -23,10 +23,17 @@ app.get('/weather/:zipcode', (request, response) => {
       return response.text();
     }).then((body) => {
       let results = JSON.parse(body)
-      console.log('hello')
+      let weatherObj = {
+        weatherCode: results.data[0].weather.icon,
+        weatherDescription: results.data[0].weather.description,
+        city: results.data[0].city_name,
+        state: results.data[0].state_code
+      }
       console.log('inside results')
       console.log(results)   // logs to server
-      response.send(results) // sends to frontend
+      console.log('weatherObj')
+      console.log(weatherObj);
+      response.send(weatherObj) // sends to frontend
     });
 });
 

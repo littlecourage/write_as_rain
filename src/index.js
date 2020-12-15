@@ -1,24 +1,23 @@
 import "./styles/index.scss";
 import "@babel/polyfill";
-import {sketch, weatherObjects, getWeather, weather} from './scripts/sketch';
+import {sketch, weatherObjects, weather, getWeather} from './scripts/sketch';
 import {sketchSnow} from './scripts/sketch_snow';
 // import {sleetSketch} from './scripts/sketch_sleet';
 import p5 from 'p5';
 
 
-let nycButton = document.querySelector('#nyc-weather')
-let snowButton = document.querySelector('#sketch-snow')
+let nycButton = document.querySelector('#nyc-weather');
+let queryForm = document.querySelector('#zip-form');
+
 let canvas;
 
 nycButton.addEventListener('click', () => sketchWeather())
-snowButton.addEventListener('click', () => addSketchSnow())
-
 
 const sketchWeather = () => {
   document.querySelector('#nyc-weather').classList.toggle('hidden');
   document.querySelector('#sketch-snow').classList.toggle('hidden');
   // launches request to the Weather Bit API not currently in use...
-  // let weather = getWeather(11375);
+  let weather = getWeather(10011);
   canvas = new p5(sketch, 'p5')
   addBackButton();
 }
