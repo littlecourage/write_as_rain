@@ -4,6 +4,8 @@ import {HEAVYCLOUD, LIGHTCLOUD, STORMCLOUD, SCATTEREDCLOUD, NIGHTCLOUD, THUNDERS
 
 class CloudySky {
   constructor(type, ctx, cloudParams) {
+    console.log(type);
+    console.log('new cloudy sky')
     this.type = type;
     this.ctx = ctx;
     this.cloudParams = cloudParams;
@@ -28,8 +30,20 @@ class CloudySky {
       }
     }
 
-    if (this.type === LIGHTCLOUD || this.type === SCATTEREDCLOUD) {
-      while (this.clouds.length < 5) {
+    if (this.type === LIGHTCLOUD) {
+      while (this.clouds.length < 7) {
+        if (this.clouds.length % 6 === 0) {
+          params.posX = this.ctx.random(50, 750);
+          this.clouds.push(new Cloud(this.type, this.ctx, params));
+        } else {
+          params.posX = this.ctx.random(50, 750);
+          this.clouds.push(new SmallCloud(this.type, this.ctx, params));
+        }
+      }
+    }
+
+    if (this.type === SCATTEREDCLOUD) {
+      while (this.clouds.length < 2) {
         params.posX = this.ctx.random(50, 750);
         this.clouds.push(new SmallCloud(this.type, this.ctx, params));
       }
@@ -84,6 +98,7 @@ class CloudySky {
     for (let cloud of this.clouds) {
       cloud.display();
     }
+    // console.log(this.clouds);
   }
   
   update() {

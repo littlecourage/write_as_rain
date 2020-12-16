@@ -3,7 +3,7 @@
 class Cloud {
 
   constructor(type, ctx, cloudParams) {
-    
+    console.log('new regular cloud')
     this.lobes = [];
     this.lifespan = 400;
     this.color = cloudParams.color[Math.floor(Math.random() * cloudParams.color.length)];
@@ -11,7 +11,7 @@ class Cloud {
     this.posY = ctx.random(-10, ctx.height/3);
     this.width = ctx.random(60, 120);
     this.height = ctx.random(60, 120);
-    this.speed = ctx.random(0.5, 1);
+    this.speed = ctx.random(0.1, 0.4);
     this.type = type
     this.ctx = ctx;
     this.numLobes = ctx.random(16, 24);
@@ -37,7 +37,7 @@ class Cloud {
     for (let i = 0; i < this.lobes.length; i++) {
       this.lobes[i].posX += this.speed;
     }
-    if (this.posX >= this.ctx.width * 2) {
+    if (this.posX >= this.ctx.width * 1.5) {
       this.lifespan = 0;
     }
   }

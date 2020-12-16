@@ -5,6 +5,12 @@ import DataManager from './data_manager';
 import axios from 'axios';
 import {backgroundStyles, weatherBitCodes, weatherDetails} from './weather_details';
 import {getProfile, buildObjects} from './builder';
+import {removeSketch} from '../index';
+
+
+export const currentStateObj = {
+  currentEventListeners: []
+}
 
 
 //const targetUrl = 'https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/2459115/';
@@ -15,7 +21,6 @@ import {getProfile, buildObjects} from './builder';
 
 
 export let weatherObjects = [];
-
 export const getWeather = async (zipcode) => {
   console.log(zipcode);
   return axios.get(`weather/${zipcode}`).then((res) => {
@@ -26,17 +31,53 @@ export const getWeather = async (zipcode) => {
     })
 }
 
+export const giveAlert = () => {
+  return alert('button clicked')
+}
+
+let alertBtn = document.getElementById("alert-btn")
+alertBtn.addEventListener("click", giveAlert)
+
+
 let queryForm = document.querySelector('#zip-form');
 let queryData;
 
-queryForm.addEventListener('submit', (e) => {
+export const handleSubmit = (e) => {
   e.preventDefault();
   let input = document.querySelector('#zip-input').value;
   getWeather(input).then(data => {
     queryData = data
     new p5(sketch, 'p5')
   })
-})
+  currentStateObj.currentEventListeners.push([
+    "#zip-form",
+    "submit",
+    handleSubmit
+  ])
+  queryForm.classList.toggle('hidden');
+  addBackButton();
+}
+
+queryForm.addEventListener('submit', handleSubmit)
+
+export const addBackButton = () => {
+  console.log(currentStateObj);
+  if (document.querySelector('#back')) {
+    document.querySelector('#back').classList.toggle('hidden');
+  } else {
+    let button = document.createElement("BUTTON")
+    button.innerHTML = 'Back'
+    button.setAttribute('id', 'back')
+    document.body.append(button)
+    document.querySelector('#back').addEventListener('click', removeSketch)
+    currentStateObj.currentEventListeners.push([
+      "#back",
+      "click",
+      removeSketch
+    ])
+  }
+}
+
 
 export const sketch = (p) => {
   //canvas attributes
