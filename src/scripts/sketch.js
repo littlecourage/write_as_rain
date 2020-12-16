@@ -1,17 +1,10 @@
 import p5 from 'p5';
 import Sky from './sky';
 import Ground from './ground';
-import DataManager from './data_manager';
 import axios from 'axios';
+import RemoveButton from './remover';
 import {backgroundStyles, weatherBitCodes, weatherDetails} from './weather_details';
 import {getProfile, buildObjects} from './builder';
-import {removeSketch} from '../index';
-
-
-export const currentStateObj = {
-  currentEventListeners: []
-}
-
 
 //const targetUrl = 'https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/2459115/';
 // const nyId = 2459115;
@@ -19,8 +12,9 @@ export const currentStateObj = {
 // const abqId = 2352824;
 // // const weatherData = DataManager.getData(nyId);
 
-
+//storage for all the objects in the sketch
 export let weatherObjects = [];
+
 export const getWeather = async (zipcode) => {
   console.log(zipcode);
   return axios.get(`weather/${zipcode}`).then((res) => {
@@ -31,58 +25,33 @@ export const getWeather = async (zipcode) => {
     })
 }
 
-export const giveAlert = () => {
-  return alert('button clicked')
-}
-
-let alertBtn = document.getElementById("alert-btn")
-alertBtn.addEventListener("click", giveAlert)
-
-
-let queryForm = document.querySelector('#zip-form');
+//initialize variable to store fetched API data
 let queryData;
 
+//grab form from the DOM
+let queryForm = document.querySelector('#zip-form');
+
+//create event handler for DOM form
 export const handleSubmit = (e) => {
   e.preventDefault();
   let input = document.querySelector('#zip-input').value;
   getWeather(input).then(data => {
     queryData = data
-    new p5(sketch, 'p5')
+    new p5(sketch, 'p5');
   })
-  currentStateObj.currentEventListeners.push([
-    "#zip-form",
-    "submit",
-    handleSubmit
-  ])
   queryForm.classList.toggle('hidden');
-  addBackButton();
 }
 
+//add event listener to queryForm -> HOISTING DOESN'T WORK HERE - DO NOT MOVE UP FILE
 queryForm.addEventListener('submit', handleSubmit)
 
-export const addBackButton = () => {
-  console.log(currentStateObj);
-  if (document.querySelector('#back')) {
-    document.querySelector('#back').classList.toggle('hidden');
-  } else {
-    let button = document.createElement("BUTTON")
-    button.innerHTML = 'Back'
-    button.setAttribute('id', 'back')
-    document.body.append(button)
-    document.querySelector('#back').addEventListener('click', removeSketch)
-    currentStateObj.currentEventListeners.push([
-      "#back",
-      "click",
-      removeSketch
-    ])
-  }
-}
-
-
+//instance methods for p5 sketch created in handleSubmit
 export const sketch = (p) => {
   //canvas attributes
   const canvasHeight = 500;
   const canvasWidth = 800;
+
+  //creating variables that need to be accessible in setup and draw
   let sky;
   let backgroundColor;
   let ground;
@@ -90,19 +59,25 @@ export const sketch = (p) => {
 
   // When using API to fetch weather
   let weather;
+
+  //flag for whether or not weather data returns night
   let night = false;
 
   p.setup = async () => {
     //create canvas container
-    p.createCanvas(canvasWidth, canvasHeight);
+    let canvas = p.createCanvas(canvasWidth, canvasHeight);
+    canvas.id('animation');
+
+    //filler text while canvas is rendering, in case API is taking a long time
     p.text('rendering the weather...', canvasWidth/2, canvasHeight/2)
+
+    //pulling out data from returned query object
     weather = queryData.weatherCode;
-    console.log(weather)
-    
-    // weather = 'u00n';
-    let timeOfDay = weather.slice(weather.length - 1);
+    // weather = 's01n'
     let weatherName = weather.slice(0, weather.length - 1);
+    let timeOfDay = weather.slice(weather.length - 1);
  
+    //adjusting style for time of day
     if (timeOfDay === 'n' || timeOfDay === 'N') {
       backgroundColor = backgroundStyles[weatherName].nightSkyColor;
       groundColor = backgroundStyles[weatherName].nightGroundColor;
@@ -112,33 +87,40 @@ export const sketch = (p) => {
       groundColor = backgroundStyles[weatherName].groundColor;
     }
 
+    //create background elements
     sky = new Sky(backgroundColor, p);
     ground = new Ground(groundColor, p);
 
+    //use weather and style codes to figure out necessary weather objects
     let profiles = getProfile(weather, weatherBitCodes);
 
+    //build weather objects and add them to weatherObjects array
     let objs = buildObjects(profiles, weatherDetails, p, night)
     weatherObjects = weatherObjects.concat(objs);
-    console.log(weatherObjects);
 
+    //add caption below canvas describing current weather from API data
     let weatherCaption = queryData.weatherDescription.toLowerCase();
     let city = queryData.city;
     let state = queryData.state;
-    console.log(weatherCaption)
     p.createDiv(`Currently ${weatherCaption} in ${city}, ${state}`).id('caption')
 
+    //add button below canvas that will allow removal of canvas and all associated objects
+    let button = new RemoveButton(p);
+    button.handleMousePressed();
   }
   
-  
   p.draw = () => {
+    //fill background using sky color
     p.background(sky.color)
-    
+    ground.display();            
+
+    //display and update everything in weatherObjects arary
     for (let obj of weatherObjects) {
       obj.display();
       obj.update();
     }
-    ground.display();
-                
+
+    //ground must be displayed last so that 
   }
 
  

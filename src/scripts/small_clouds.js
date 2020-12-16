@@ -9,7 +9,7 @@ class SmallCloud {
     this.posY = ctx.random(-10, ctx.height/3);
     this.width = ctx.random(30, 50);
     this.height = ctx.random(30, 50);
-    this.speed = ctx.random(0.3, 0.7);
+    this.speed = ctx.random(0.1, 0.5);
     this.type = type;
     this.ctx = ctx;
     this.numLobes = ctx.random(12, 16);
