@@ -1,7 +1,6 @@
 class SmallCloud {
 
   constructor(type, ctx, cloudParams) {
-    console.log('new small cloud')
     this.lobes = [];
     this.lifespan = 400;
     this.color = cloudParams.color[Math.floor(Math.random() * cloudParams.color.length)];
@@ -30,12 +29,7 @@ class SmallCloud {
 
 
   update() {
-    // console.log('before')
-    // console.log(this.posX)
-    // console.log(`speed: ${this.speed}`)
-    // console.log('after');
     this.posX = this.posX + this.speed;
-    // console.log(this.posX)
     for (let i = 0; i < this.lobes.length; i++) {
       this.lobes[i].posX += this.speed;
     }
@@ -45,7 +39,6 @@ class SmallCloud {
   }
 
   display() {
-    // this.ctx.noStroke();
     this.ctx.fill(this.color);
     this.ctx.ellipse(this.posX, this.posY, this.width, this.height)
     for (let i = 0; i < this.lobes.length; i++) {

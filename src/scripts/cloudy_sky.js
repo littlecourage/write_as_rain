@@ -4,8 +4,6 @@ import {HEAVYCLOUD, LIGHTCLOUD, STORMCLOUD, SCATTEREDCLOUD, NIGHTCLOUD, THUNDERS
 
 class CloudySky {
   constructor(type, ctx, cloudParams) {
-    console.log(type);
-    console.log('new cloudy sky')
     this.type = type;
     this.ctx = ctx;
     this.cloudParams = cloudParams;
@@ -98,7 +96,7 @@ class CloudySky {
     for (let cloud of this.clouds) {
       cloud.display();
     }
-    // console.log(this.clouds);
+
   }
   
   update() {

@@ -1,9 +1,7 @@
-// import FloatingObject from './floating_object';
 
 class Cloud {
 
   constructor(type, ctx, cloudParams) {
-    console.log('new regular cloud')
     this.lobes = [];
     this.lifespan = 400;
     this.color = cloudParams.color[Math.floor(Math.random() * cloudParams.color.length)];
@@ -43,7 +41,6 @@ class Cloud {
   }
 
   display() {
-    // this.ctx.noStroke();
     this.ctx.fill(this.color);
     this.ctx.ellipse(this.posX, this.posY, this.width, this.height)
     for (let i = 0; i < this.lobes.length; i++) {
