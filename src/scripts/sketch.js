@@ -1,10 +1,10 @@
 import p5 from 'p5';
 import Sky from './sky';
-import Ground from './ground';
 import axios from 'axios';
+import Ground from './ground';
 import RemoveButton from './remover';
-import {backgroundStyles, weatherBitCodes, weatherDetails} from './weather_details';
 import {getProfile, buildObjects} from './builder';
+import {backgroundStyles, weatherBitCodes, weatherDetails} from './weather_details';
 
 //const targetUrl = 'https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/2459115/';
 // const nyId = 2459115;
@@ -31,11 +31,30 @@ let queryData;
 //grab form from the DOM
 let queryForm = document.querySelector('#zip-form');
 
+
+const handleInput = (e) => {
+  e.preventDefault();
+  let errorSpan = document.getElementById('error');
+  errorSpan.textContent = "";
+  let input = document.querySelector('#zip-input').value;
+  if (!isValidZip(input)) {
+    showErrors();
+  }
+}
+
+
+let inputBox = document.querySelector('#zip-input')
+inputBox.addEventListener('input', handleInput)
+
+
 //create event handler for DOM form
 export const handleSubmit = (e) => {
   e.preventDefault();
-  let input = document.querySelector('#zip-input').value;
-  getWeather(input).then(data => {
+  let zipInput = document.querySelector('#zip-input').value;
+  if (!isValidZip(zipInput)) {
+    return false;
+  }
+  getWeather(zipInput).then(data => {
     queryData = data
     new p5(sketch, 'p5');
   })
@@ -45,6 +64,20 @@ export const handleSubmit = (e) => {
 //add event listener to queryForm -> HOISTING DOESN'T WORK HERE - DO NOT MOVE UP FILE
 queryForm.addEventListener('submit', handleSubmit)
 
+
+const showErrors = () => {
+  let errorSpan = document.getElementById('error');
+  errorSpan.textContent = "Invalid zipcode";
+}
+
+
+//front end zip validation
+const isValidZip = (zip) => {
+  //checks for a 5 digit zipcode or a 5 digit hyphen 4 digit zip
+  const zipPattern = /^\d{5}(-\d{4})?$/;
+  return zipPattern.test(zip);
+}
+
 //instance methods for p5 sketch created in handleSubmit
 export const sketch = (p) => {
   //canvas attributes
@@ -53,9 +86,9 @@ export const sketch = (p) => {
 
   //creating variables that need to be accessible in setup and draw
   let sky;
-  let backgroundColor;
   let ground;
   let groundColor;
+  let backgroundColor;
 
   // When using API to fetch weather
   let weather;
