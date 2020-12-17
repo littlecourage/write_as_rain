@@ -18,7 +18,7 @@ app.get('/weather/:zipcode', (request, response) => {
   console.log('hi from weather get!');
   console.log(`request.params.zipcode: ${request.params.zipcode}`)
   // make api call using fetch
-  fetch(`http://api.weatherbit.io/v2.0/current?postal_code=${request.params.zipcode}&country=US&key=${process.env.WB_API_KEY}`)
+  fetch(`http://api.weatherbit.io/v2.0/current?units=I&postal_code=${request.params.zipcode}&country=US&key=${process.env.WB_API_KEY}`)
     .then((response) => {
       return response.text();
     }).then((body) => {
@@ -26,6 +26,7 @@ app.get('/weather/:zipcode', (request, response) => {
       let weatherObj = {
         weatherCode: results.data[0].weather.icon,
         weatherDescription: results.data[0].weather.description,
+        temp: results.data[0].temp,
         city: results.data[0].city_name,
         state: results.data[0].state_code
       }

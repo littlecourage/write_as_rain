@@ -132,10 +132,25 @@ export const sketch = (p) => {
     weatherObjects = weatherObjects.concat(objs);
 
     //add caption below canvas describing current weather from API data
+    let temp = queryData.temp;
     let weatherCaption = queryData.weatherDescription.toLowerCase();
     let city = queryData.city;
     let state = queryData.state;
-    p.createDiv(`Currently ${weatherCaption} in ${city}, ${state}`).id('caption')
+
+    // `Currently ${temp} degrees ${weatherCaption} and  in ${city}, ${state}`)
+    let div = p.createDiv().id('caption')
+
+    let ul = p.createElement('ul').addClass('cap-list');
+    ul.parent(div);
+
+    let liLocation = p.createElement('li', `${city}, ${state}`)
+    liLocation.parent(ul);
+
+    let liTemp = p.createElement('li', `${temp}° F`)
+    liTemp.parent(ul);
+
+    let liWeatherCap = p.createElement('li', `${weatherCaption}`)
+    liWeatherCap.parent(ul);
 
     //add button below canvas that will allow removal of canvas and all associated objects
     let button = new RemoveButton(p);

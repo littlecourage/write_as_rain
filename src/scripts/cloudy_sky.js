@@ -41,7 +41,7 @@ class CloudySky {
     }
 
     if (this.type === SCATTEREDCLOUD) {
-      while (this.clouds.length < 2) {
+      while (this.clouds.length < 1) {
         params.posX = this.ctx.random(50, 750);
         this.clouds.push(new SmallCloud(this.type, this.ctx, params));
       }
@@ -86,8 +86,7 @@ class CloudySky {
     }
 
     if (this.type === SCATTEREDCLOUD) {
-      if (this.timer > this.ctx.random(400, 550)) {
-        this.clouds.push(new SmallCloud(this.type, this.ctx, this.cloudParams));
+      if (this.timer > this.ctx.random(1000, 1300)) {
         this.clouds.push(new SmallCloud(this.type, this.ctx, this.cloudParams));
         this.timer = 0;
       }

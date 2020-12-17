@@ -1,0 +1,15 @@
+#p5 {
+  border: red 1px solid;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  button {
+    font-family: 'Jost', sans-serif;
+    border-radius: 2px;
+  }
+}
+
+#caption {
+  display: flex;
+  justify-content: space-between;
+}
