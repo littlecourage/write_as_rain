@@ -7,20 +7,25 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <!-- <script src="./src/scripts/p5.js"></script> -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Jost:ital@1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./main.css" />
   <title>Write As Rain</title>
 </head>
 
 <body>
-  <form id="zip-form" class="form">
-    <label for="zipcode">
-      <span>Enter a zipcode</span>
-      <input type="text" name="zipcode" id="zip-input">
-      <span class="errors" id="error" ></span>
-    </label>
-    <button>Draw the Weather</button>
-  </form>
+  <div class="title">
+    <h1>Write as Rain</h1>
+  </div>
+  <div id="zip-form">
+    <form  class="form">
+      <label for="zipcode">
+        <span>Enter a zipcode</span>
+        <input type="text" name="zipcode" id="zip-input">
+        <span class="errors" id="error" ></span>
+      </label>
+      <button>Draw the Weather</button>
+    </form>
+  </div>
 
   <div class="p5" id="p5"></div>
   <script src="./main.js"></script>

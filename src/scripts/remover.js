@@ -9,7 +9,7 @@ class RemoveButton {
   }
 
   addButton() {
-    this.button = this.ctx.createButton('remove').id('remover-btn');
+    this.button = this.ctx.createButton('Go Back').id('remover-btn');
   }
 
   handleMousePressed() {

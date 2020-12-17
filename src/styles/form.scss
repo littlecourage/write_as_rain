@@ -1,20 +1,44 @@
 body {
   background-color: #8A8D92;
+  // background: linear-gradient(to top, #919191 0%, #d8d9d9 82%);
   display: flex;
   flex-direction: column;
   justify-content:  center;
+  align-items: center;
   font-family: 'Jost', sans-serif;
   height: 95vh;
-  border: 1px solid red;
+  // border: 1px solid red;
 }
 
+h1 {
+  animation: fadeInAnimation ease 3s; 
+  animation-iteration-count: 1; 
+  animation-fill-mode: forwards; 
+  color: #DFE8F9;
+  font-style: italic;
+  font-weight: 400;
+  // border: red 1px solid;
+  // margin-top: 100px;
+}
+
+// .title {
+//   // visibility: visible;
+// }
+
+// #zip-form {
+//   // border: red 1px solid;
+// }
 
 .form {
+  animation: fadeInAnimation ease 6s; 
+  animation-iteration-count: 1; 
+  animation-fill-mode: forwards; 
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: #4A495C;
   label {
-    border: red 1px solid;
+    // border: red 1px solid;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -25,6 +49,7 @@ body {
     font-family: 'Jost', sans-serif;
     font-size: 14px;
     color: #6B6D72;
+    background-color: #DFE8F9;
     text-align: center;
     border: 1px solid black;
     border-radius: 2px;
@@ -32,10 +57,20 @@ body {
 
   span, button {
     margin: 10px;
+    color: #4A495C;
   }
   button {
     font-family: 'Jost', sans-serif;
-    border-radius: 2px;
+    border-radius: 4px;
+    padding: 5px 10px;
+    color: #DFE8F9;
+    background-color: #4A495C;
+    transition: background-color 0.5s ease;
+  }
+
+  button:hover {
+    color: #4A495C;
+    background-color: #DFE8F9;
   }
 
 }
@@ -49,4 +84,12 @@ body {
   display: none;
 }
 
+@keyframes fadeInAnimation { 
+    0% { 
+        opacity: 0; 
+    } 
+    100% { 
+        opacity: 1; 
+    } 
+  } 
 

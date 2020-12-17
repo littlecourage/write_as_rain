@@ -1,15 +1,51 @@
 #p5 {
-  border: red 1px solid;
   display: flex;
   align-items: center;
   flex-direction: column;
+  width: 1000px;
+
+  canvas {
+    animation: fadeInAnimation ease 3s;
+    border-radius: 4px;
+  }
   button {
     font-family: 'Jost', sans-serif;
-    border-radius: 2px;
+    font-size: 16px;
+    border-radius: 4px;
+    padding: 5px 10px;
+    color: #DFE8F9;
+    background-color: #4A495C;
+    transition: background-color 0.5s ease;
+  }
+  button:hover {
+    color: #4A495C;
+    background-color: #DFE8F9;
   }
 }
 
-#caption {
+#caption {
+  border: 1px red solid;
+  width: 800px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  ul {
+    border: 1px red solid;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  li {
+    border: 1px red solid;
+    display: inline-block;
+    margin-right: 30px;
+  }
 }
+
+@keyframes fadeInAnimation { 
+    0% { 
+        opacity: 0; 
+    } 
+    100% { 
+        opacity: 1; 
+    } 
+  } 
