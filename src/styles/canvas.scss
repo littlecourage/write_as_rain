@@ -28,17 +28,7 @@
   width: 800px;
   display: flex;
   justify-content: center;
-  ul {
-    border: 1px red solid;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-  li {
-    border: 1px red solid;
-    display: inline-block;
-    margin-right: 30px;
-  }
+
 }
 
 @keyframes fadeInAnimation { 
