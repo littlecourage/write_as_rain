@@ -140,14 +140,24 @@ export const sketch = (p) => {
     // `Currently ${temp} degrees ${weatherCaption} and  in ${city}, ${state}`)
     let div = p.createDiv().id('caption')
 
-    let tempCap = p.createDiv(`${temp}° F`)
-    tempCap.parent(div);
+    let tempDiv = p.createDiv()
+    tempDiv.parent(div);
 
-    let location = p.createDiv(`${city}, ${state}`)
-    location.parent(div);
+    let tempCap = p.createElement('span', `${temp}° F`)
+    tempCap.parent(tempDiv)
 
-    let weatherCap = p.createDiv(`${weatherCaption}`)
-    weatherCap.parent(div);
+    let locationDiv = p.createDiv()
+    locationDiv.parent(div);
+
+    let locationCap = p.createElement('span', `${city}, ${state}`)
+    locationCap.parent(locationDiv)
+
+    let weatherDiv = p.createDiv()
+    weatherDiv.parent(div);
+
+    let weatherCap = p.createElement('span', `${weatherCaption}`)
+    weatherCap.parent(weatherDiv)
+
 
     //add button below canvas that will allow removal of canvas and all associated objects
     let button = new RemoveButton(p);
