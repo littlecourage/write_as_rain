@@ -92,14 +92,16 @@ export const sketch = (p) => {
 
   // When using API to fetch weather
   let weather;
+  let night;
 
-  //flag for whether or not weather data returns night
-  let night = false;
-
+  
   p.setup = async () => {
     //create canvas container
     let canvas = p.createCanvas(canvasWidth, canvasHeight);
     canvas.id('animation');
+    
+    //flag for whether or not weather data returns night
+    night = false;
 
     //filler text while canvas is rendering, in case API is taking a long time
     p.text('rendering the weather...', canvasWidth/2, canvasHeight/2)
@@ -109,6 +111,8 @@ export const sketch = (p) => {
     // weather = 's01n'
     let weatherName = weather.slice(0, weather.length - 1);
     let timeOfDay = weather.slice(weather.length - 1);
+    console.log(weather);
+    console.log(timeOfDay);
  
     //adjusting style for time of day
     if (timeOfDay === 'n' || timeOfDay === 'N') {
@@ -130,6 +134,7 @@ export const sketch = (p) => {
     //build weather objects and add them to weatherObjects array
     let objs = buildObjects(profiles, weatherDetails, p, night)
     weatherObjects = weatherObjects.concat(objs);
+    console.log(weatherObjects)
 
     //add caption below canvas describing current weather from API data
     let temp = queryData.temp;

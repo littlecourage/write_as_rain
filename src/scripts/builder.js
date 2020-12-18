@@ -37,6 +37,7 @@ export const getProfile = (type, map) => {
 //change this to accept array of profiles eventually
 export const buildObjects = (profiles, styles, ctx, night) => {
   let objects = [];
+  console.log(night);
 
   for (let profile of profiles){
     let style = styles[profile];
@@ -149,13 +150,22 @@ export const buildObjects = (profiles, styles, ctx, night) => {
       ctx.noStroke();
       let sunParams = style;
       if (night) {
-        sunParams.color = '#FEF6E7';
-        sunParams.posX = 700;
-        sunParams.posY = 100;
+        //give moon its own style in weather details
+        let moonParams = {
+          color: '#FEF6E7',
+          posX: 700,
+          posY: 100,
+          width: 60,
+          height: 60,
+        }
+        moonParams.ctx = ctx;
+        let moon = new Sun(moonParams);
+        objects.push(moon);
+      } else {
+        sunParams.ctx = ctx;
+        let sun = new Sun(sunParams);
+        objects.push(sun);
       }
-      sunParams.ctx = ctx;
-      let sun = new Sun(sunParams);
-      objects.push(sun);
     }
   }
 
