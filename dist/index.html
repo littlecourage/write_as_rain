@@ -20,36 +20,42 @@
 </head>
 
 <body>
-  <div class="title">
-    <h1>Write as Rain</h1>
+  <div class="content">
+    <div class="title">
+      <h1>Write as Rain</h1>
+    </div>
+    <div id="zip-form">
+      <form  class="form">
+        <label for="zipcode">
+          <span>Enter a zipcode</span>
+          <input type="text" name="zipcode" id="zip-input">
+          <span class="errors" id="error" ></span>
+        </label>
+        <button>Draw the Weather</button>
+      </form>
+    </div>
+    <div class="p5" id="p5"></div>
+    <script src="./main.js"></script>
   </div>
-  <div id="zip-form">
-    <form  class="form">
-      <label for="zipcode">
-        <span>Enter a zipcode</span>
-        <input type="text" name="zipcode" id="zip-input">
-        <span class="errors" id="error" ></span>
-      </label>
-      <button>Draw the Weather</button>
-    </form>
-  </div>
-  <div class="p5" id="p5"></div>
-  <script src="./main.js"></script>
+  <footer class="footer">
+    <div>
+
+      <span>Created by
+        <a href="https://littlecourage.github.io/">Christine Adams</a>
+      </span>
+      <span>
+        <a href="https://github.com/littlecourage"><i class="fab fa-github"></i></a>
+      </span>
+      <span>
+        <a href="https://www.linkedin.com/in/christine-adams-180646123/"><i class="fab fa-linkedin"></i></a>
+      </span>
+      <span>
+        <a href="https://angel.co/u/christine-adams-5"><i class="fab fa-angellist"></i></a>
+      </span>
+    </div>
+  </footer>
 </body>
 
-<footer>
-  <span>Created by 
-    <a href="https://littlecourage.github.io/">Christine Adams</a>
-  </span>
-  <span>
-    <a href="https://github.com/littlecourage"><i class="fab fa-github"></i></a>
-  </span>
-  <span>
-    <a href="https://www.linkedin.com/in/christine-adams-180646123/"><i class="fab fa-linkedin"></i></a>
-  </span>
-  <span>
-    <a href="https://angel.co/u/christine-adams-5"><i class="fab fa-angellist"></i></a>
-  </span>
-</footer>
+
 
 </html>

@@ -1,0 +1,19 @@
+.footer {
+  flex-shrink: 0;
+  width: 100%;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  color: #4A495C;
+  padding-right: 10px;
+  div {
+    display: flex;
+    justify-content: flex-end;
+  }
+  span {
+    padding-right: 8px;
+  }
+  a {
+    color: #4A495C;
+    margin-left: 3px;
+  }
+}
