@@ -16,7 +16,9 @@ Weather features depicted include:
 * Lightning
 * Sun/Moon
 
+![](./src/images/gif3.gif)
 ![](./src/images/gif2.gif)
+![](./src/images/cloudygif2.gif)
 
 ## Technology:
 This app was created with JavaScript and utilizes the p5.js library to produce Canvas animations. The weather data is acquired using the Weatherbit.io API, and the app includes a lightweight Node.js backend with Express to securely fetch API data.
