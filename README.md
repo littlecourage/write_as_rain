@@ -18,6 +18,7 @@ Weather features depicted include:
 
 ![](./src/images/gif3.gif)
 ![](./src/images/gif2.gif)
+![](./src/images/lightraingif.gif)
 ![](./src/images/cloudygif2.gif)
 
 ## Technology:
