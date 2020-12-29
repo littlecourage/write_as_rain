@@ -57,10 +57,14 @@ export const handleSubmit = (e) => {
     return false;
   }
   getWeather(zipInput).then(data => {
-    queryData = data
-    new p5(sketch, 'p5');
+    if (data.weatherCode === 'invalid') {
+      showErrors();
+    } else {
+      queryData = data
+      new p5(sketch, 'p5');
+      queryForm.classList.toggle('hidden');
+    }
   })
-  queryForm.classList.toggle('hidden');
 }
 
 //add event listener to queryForm -> HOISTING DOESN'T WORK HERE - DO NOT MOVE UP FILE
