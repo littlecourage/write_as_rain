@@ -19,6 +19,13 @@ closeBtn.addEventListener('click', () => {
   modalOverlay.classList.toggle('open');
 })
 
+window.onclick = (e) => {
+  if (e.target === modalOverlay) {
+    modal.classList.toggle('open');
+    modalOverlay.classList.toggle('open');
+  }
+}
+
 
 
 // let queryForm = document.querySelector('#zip-form');
