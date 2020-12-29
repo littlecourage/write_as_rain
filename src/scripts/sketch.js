@@ -6,11 +6,13 @@ import RemoveButton from './remover';
 import {getProfile, buildObjects} from './builder';
 import {backgroundStyles, weatherBitCodes, weatherDetails} from './weather_details';
 
-//const targetUrl = 'https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/2459115/';
-// const nyId = 2459115;
-// const laId = 2442047;
-// const abqId = 2352824;
-// // const weatherData = DataManager.getData(nyId);
+/*
+separation of concerns
+inversion of control
+seams
+software contracts
+*/
+
 
 //storage for all the objects in the sketch
 export let weatherObjects = [];
@@ -134,7 +136,9 @@ export const sketch = (p) => {
     //build weather objects and add them to weatherObjects array
     let objs = buildObjects(profiles, weatherDetails, p, night)
     weatherObjects = weatherObjects.concat(objs);
-    console.log(weatherObjects)
+
+
+    // console.log(weatherObjects)
 
     //add caption below canvas describing current weather from API data
     let temp = queryData.temp;

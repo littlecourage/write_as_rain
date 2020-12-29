@@ -4,6 +4,23 @@ import {handleSubmit, currentStateObj, giveAlert, sketch, weatherObjects, weathe
 
 
 
+let modal = document.querySelector('#modal');
+let modalOverlay = document.querySelector('.modal-overlay');
+let openBtn = document.querySelector('#open-modal');
+let closeBtn = document.querySelector('#close-modal');
+
+openBtn.addEventListener('click', () => {
+  modal.classList.toggle('open');
+  modalOverlay.classList.toggle('open');
+})
+
+closeBtn.addEventListener('click', () => {
+  modal.classList.toggle('open');
+  modalOverlay.classList.toggle('open');
+})
+
+
+
 // let queryForm = document.querySelector('#zip-form');
 
 

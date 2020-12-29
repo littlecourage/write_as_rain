@@ -20,10 +20,31 @@
 </head>
 
 <body>
+  <header>
+    <button id="open-modal"><i class="fas fa-question-circle"></i></button>
+  </header>
   <div class="content">
     <div class="title">
       <h1>Write as Rain</h1>
     </div>
+    <div class="modal" id="modal">
+      <div class="button-div">
+        <button id="close-modal"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-content">
+        <p>
+        <h4>Write as Rain</h4> 
+        is an AI that attempts to draw the weather for a given location 
+        based on the current weather data for that area. 
+        The animations are powered by the <h5>p5.js library</h5> and the site was built
+        with vanilla <h5>JavaScript, SCSS, and HTML.</h5>
+        </p>
+        <span>To use this application, enter a U.S. 5 or 9 digit zipcode.</span>
+        <br>
+        <span><i>For Example: 10011 or 10011-7902</i></span>
+      </div>
+    </div>
+    <div class="modal-overlay"></div>
     <div id="zip-form">
       <form  class="form">
         <label for="zipcode">
@@ -39,14 +60,13 @@
   </div>
   <footer class="footer">
     <div>
-
       <span>Created by
         <a href="https://littlecourage.github.io/" target="_blank" rel="noopener noreferrer">
           Christine Adams
         </a>
       </span>
       <span>
-        <a href="https://github.com/littlecourage" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/littlecourage/write_as_rain/tree/main" target="_blank" rel="noopener noreferrer">
           <i class="fab fa-github"></i>
         </a>
       </span>
@@ -62,6 +82,7 @@
       </span>
     </div>
   </footer>
+
 </body>
 
 

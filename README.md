@@ -24,6 +24,10 @@ Weather features depicted include:
 ## Technology:
 This app was created with JavaScript and utilizes the p5.js library to produce Canvas animations. The weather data is acquired using the Weatherbit.io API, and the app includes a lightweight Node.js backend with Express to securely fetch API data.
 
+## Challenges:
+The main challenge of Write as Rain came from delegating the production of various weather elements and then cohesively combining them in one animation. The solution was to make the code as object oriented as possible. The weather API data is digested by the "weather builder" that controls which weather elements are created in each animation. 
+
+
 
 ## Todos:
 * Little figures in the weather scene that respond to the weather, such as a kite, leaves, or a snowman
