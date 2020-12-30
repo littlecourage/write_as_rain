@@ -27,7 +27,6 @@ class SmallCloud {
     }
   }
 
-
   update() {
     this.posX = this.posX + this.speed;
     for (let i = 0; i < this.lobes.length; i++) {

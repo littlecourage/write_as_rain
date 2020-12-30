@@ -2,6 +2,7 @@ import p5 from 'p5';
 import Sky from './sky';
 import axios from 'axios';
 import Ground from './ground';
+import Caption from './caption';
 import RemoveButton from './remover';
 import {getProfile, buildObjects} from './builder';
 import {backgroundStyles, weatherBitCodes, weatherDetails} from './weather_details';
@@ -140,33 +141,8 @@ export const sketch = (p) => {
     let objs = buildObjects(profiles, weatherDetails, p, night)
     weatherObjects = weatherObjects.concat(objs);
 
-    //add caption below canvas describing current weather from API data
-    let temp = queryData.temp;
-    let weatherCaption = queryData.weatherDescription.toLowerCase();
-    let city = queryData.city;
-    let state = queryData.state;
-
-    // `Currently ${temp} degrees ${weatherCaption} and  in ${city}, ${state}`)
-    let div = p.createDiv().id('caption')
-
-    let tempDiv = p.createDiv()
-    tempDiv.parent(div);
-
-    let tempCap = p.createElement('span', `${temp}° F`)
-    tempCap.parent(tempDiv)
-
-    let locationDiv = p.createDiv()
-    locationDiv.parent(div);
-
-    let locationCap = p.createElement('span', `${city}, ${state}`)
-    locationCap.parent(locationDiv)
-
-    let weatherDiv = p.createDiv()
-    weatherDiv.parent(div);
-
-    let weatherCap = p.createElement('span', `${weatherCaption}`)
-    weatherCap.parent(weatherDiv)
-
+    // //add caption below canvas describing current weather from API data
+    let caption = new Caption(queryData, p);
 
     //add button below canvas that will allow removal of canvas and all associated objects
     let button = new RemoveButton(p);
