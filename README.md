@@ -31,7 +31,7 @@ The main challenge of Write as Rain stemmed from the need to create unique combi
 
 First, API data is digested by the ```buildObjects``` function. This function builds each individual weather element that is necessary for the weather code returned by the API. In traditional p5.js animation implementation, this would be done in the ```setup``` and ```draw``` functions. However, because this animation many variables and possible combinations, it made more sense to utilize inversion of control and create individual classes for each weather element. These classes are passed the p5.js context and manage their own creation and animation. Thus, the setup and draw for the p5.js instance are as simplified and DRY as possible. This design ensures easier debugging and simple implementation of additional weather objects in the future.
 
-```
+``` js
 //storage for all the objects in the sketch
 let weatherObjects = [];
 
@@ -113,7 +113,7 @@ Another challenge was sanitizing user input to ensure that the API was able to
 return weather for the zipcode entered. User input is first screened on the frontend
 using a simple regex pattern that ensures user input matches the format of a US zipcode.
 
-```
+``` js
 const isValidZip = (zip) => {
   //checks for a 5 digit zipcode or a 5 digit hyphen 4 digit zip
   const zipPattern = /^\d{5}(-\d{4})?$/;
@@ -123,7 +123,7 @@ const isValidZip = (zip) => {
 
 However, this input still needed to be sanitized further in situations where the numbers might be in the correct format but the API is unable to fetch weather for that zipcode. For example, 00000 passes the regex pattern test, but it isn't a valid zipcode. Therefore, I needed to check the API response for a 204 status on the backend, and then communicate to the frontend that an error should be shown instead of drawing the animation. 
 
-```
+``` js
 app.get('/weather/:zipcode', (request, response) => {
   // make api call using fetch
   fetch(`http://api.weatherbit.io/v2.0/current?units=I&postal_code=${request.params.zipcode}&country=US&key=${process.env.WB_API_KEY}`)
@@ -150,7 +150,7 @@ app.get('/weather/:zipcode', (request, response) => {
 });
 ```
 Frontend event handler for form submission: 
-```
+```js
 const handleSubmit = (e) => {
   e.preventDefault();
   let zipInput = document.querySelector('#zip-input').value;
