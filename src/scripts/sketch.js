@@ -57,7 +57,7 @@ export const handleSubmit = (e) => {
     return false;
   }
   getWeather(zipInput).then(data => {
-    if (data.weatherCode === 'invalid') {
+    if (data === 'invalid request') {
       showErrors();
     } else {
       queryData = data
@@ -114,12 +114,11 @@ export const sketch = (p) => {
 
     //pulling out data from returned query object
     weather = queryData.weatherCode;
-    // weather = 's01n'
+
+    //disect weather code returned from API into 2 parts
     let weatherName = weather.slice(0, weather.length - 1);
     let timeOfDay = weather.slice(weather.length - 1);
-    console.log(weather);
-    console.log(timeOfDay);
- 
+
     //adjusting style for time of day
     if (timeOfDay === 'n' || timeOfDay === 'N') {
       backgroundColor = backgroundStyles[weatherName].nightSkyColor;
@@ -140,9 +139,6 @@ export const sketch = (p) => {
     //build weather objects and add them to weatherObjects array
     let objs = buildObjects(profiles, weatherDetails, p, night)
     weatherObjects = weatherObjects.concat(objs);
-
-
-    // console.log(weatherObjects)
 
     //add caption below canvas describing current weather from API data
     let temp = queryData.temp;
@@ -187,8 +183,6 @@ export const sketch = (p) => {
       obj.display();
       obj.update();
     }
-
-    //ground must be displayed last so that 
   }
 
  

@@ -21,14 +21,12 @@ app.get('/weather/:zipcode', (request, response) => {
   fetch(`http://api.weatherbit.io/v2.0/current?units=I&postal_code=${request.params.zipcode}&country=US&key=${process.env.WB_API_KEY}`)
   .then((response) => {
       if (response.status === 204) {
-        console.log('null results');
         return null;
       }
       return response.text();
     }).then((body) => {
       if (body === null) {
-        console.log('sad');
-        response.send({ weatherCode: 'invalid' })
+        response.send('invalid request')
       } else {
         let results = JSON.parse(body)
         let weatherObj = {

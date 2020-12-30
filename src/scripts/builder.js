@@ -37,7 +37,6 @@ export const getProfile = (type, map) => {
 //change this to accept array of profiles eventually
 export const buildObjects = (profiles, styles, ctx, night) => {
   let objects = [];
-  console.log(night);
 
   for (let profile of profiles){
     let style = styles[profile];
