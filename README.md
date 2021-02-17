@@ -5,7 +5,7 @@
 Write as Rain is a web app that draws the weather. Check out the live site [here](https://write-as-rain.herokuapp.com/)!
 
 ## Technology:
-This app was created with JavaScript and utilizes the p5.js library to produce Canvas animations. Write as Rain is integerated with the Weatherbit.io API to fetch current weather data, and the app includes a lightweight Node.js backend with Express to securely fetch API data.
+This app was created with JavaScript and utilizes the p5.js library to produce Canvas animations. Write as Rain is integrated with the Weatherbit.io API to fetch current weather data, and the app includes a lightweight Node.js backend with Express to securely fetch API data.
 
 ## Features:
 Users are able to iput a USA 5 or 9 digit zipcode and see a live animation of the current weather conditions. The app draws the weather outside based on the weather data for that location. It also lists the city, state, temperature, and weather conditions.
